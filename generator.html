@@ -370,7 +370,8 @@
   <h1 class="intro-title">Dein Business Kompass</h1>
   <p class="intro-philosophy">Manche scheitern nicht an Motivation — sondern an Ideen, die nie wirklich zu ihnen gepasst haben.</p>
   <div class="intro-badge">Persönlichkeitsbasierte Businessfindung</div>
-  <button class="btn-primary" onclick="startQuiz()">Jetzt starten →</button>
+  <p style="font-size:13px; color:var(--terra); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; font-family:'DM Sans',sans-serif;">Für nur 27 €</p>
+  <a href="DEIN_DIGISTORE_LINK" class="btn-primary" style="text-decoration:none; margin-bottom:8px;">Jetzt starten →</a>
   <p class="intro-note">Je ehrlicher du antwortest, desto mehr wirst du dich in den Ideen wiederfinden.</p>
 </div>
 
@@ -398,17 +399,16 @@
   </div>
 </div>
 
-<!-- PAYMENT -->
+<!-- CONGRATS -->
 <div id="screen-payment" class="screen">
-  <div class="payment-star">✦</div>
-  <h2 class="payment-title">Deine Antworten sind bereit.</h2>
-  <p class="payment-sub">Alle 20 Antworten sind da. Jetzt erstellt die KI deine 5 persönlichen Business-Ideen.</p>
-  <p class="payment-note">Nach dem Kauf klicke auf "Bereits bezahlt" und deine Ergebnisse erscheinen sofort.</p>
-  <a href="DEIN_DIGISTORE_LINK" target="_blank" class="btn-buy">Jetzt kaufen – 27 € →</a>
-  <p class="payment-secure">Sicherer Kauf über Digistore24</p>
-  <div class="payment-divider"></div>
-  <p class="payment-already">Bereits bezahlt?</p>
-  <button class="btn-already" onclick="submitAnswers()">Ideen jetzt generieren →</button>
+  <div style="justify-content:center; align-items:center; text-align:center; padding:48px 24px; display:flex; flex-direction:column; flex:1;">
+    <div style="font-size:48px; margin-bottom:20px;">🎉</div>
+    <h2 style="font-family:'Playfair Display',serif; font-size:28px; color:var(--brown-deep); margin-bottom:16px; font-weight:400;">Herzlichen Glückwunsch!</h2>
+    <p style="font-size:17px; color:var(--text-mid); line-height:1.7; max-width:420px; margin:0 auto 8px;">Du hast alle 20 Fragen beantwortet.</p>
+    <p style="font-size:15px; color:var(--text-light); line-height:1.7; max-width:400px; margin:0 auto 40px;">Wenn du auf den Button klickst, kommen sofort deine 5 persönlichen Business-Ideen — generiert aus genau deinen Antworten.</p>
+    <button onclick="submitAnswers()" style="background:var(--terra); color:var(--cream); border:none; padding:18px 48px; font-size:16px; font-weight:500; cursor:pointer; letter-spacing:0.05em; font-family:'DM Sans',sans-serif; transition:background 0.2s; margin-bottom:12px;">Meine Ideen anzeigen →</button>
+    <p style="font-size:12px; color:var(--text-light); letter-spacing:0.1em; text-transform:uppercase;">Deine persönlichen Ergebnisse warten</p>
+  </div>
 </div>
 
 <!-- LOADING -->
