@@ -5,6 +5,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.json({ status: 'Business Kompass API läuft' });
+});
+
 app.post('/api/generate', async (req, res) => {
   const { prompt } = req.body;
 
