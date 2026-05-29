@@ -2,8 +2,10 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dein Business Kompass – Ergebnis</title>
+<title>Dein Business Kompass   Ergebnis</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -445,9 +447,19 @@
   /* Print styles */
   @media print {
     .print-bar { display: none !important; }
-    body { background: white; }
+    * { 
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
     .cover, .idea-page, .closing-page { min-height: auto; }
     .page { max-width: 100%; }
+  }
+  
+  /* Force colors in all contexts */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
   @page {
@@ -461,7 +473,10 @@
 <!-- PRINT BAR -->
 <div class="print-bar">
   <span>Logic | Soul · Business Kompass</span>
-  <button class="print-btn" onclick="window.print()">Als PDF speichern</button>
+  <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+    <button class="print-btn" onclick="window.print()">Als PDF speichern</button>
+    <span style="font-size:11px; color:rgba(242,232,217,0.4); letter-spacing:0.08em;">Tipp: In den Druckeinstellungen "Hintergrundgrafiken" aktivieren für volle Farben</span>
+  </div>
 </div>
 
 <div class="page">
@@ -515,7 +530,7 @@
       Und sie ergibt Sinn, wenn du dich selbst<br>
       darin wiederfindest.
     </p>
-    <p class="philosophy-source">— Logic | Soul</p>
+    <p class="philosophy-source">  Logic | Soul</p>
   </div>
 
   <!-- ══ IDEEN (5x) ══ -->
@@ -531,7 +546,7 @@
     <div class="idea-body">
       <div class="idea-section">
         <div class="idea-section-label">Warum genau du</div>
-        <p class="idea-section-text" id="idea-1-warum">Hier steht warum diese Idee exakt zu dieser Person passt – mit direktem Bezug auf ihre Antworten.</p>
+        <p class="idea-section-text" id="idea-1-warum">Hier steht warum diese Idee exakt zu dieser Person passt   mit direktem Bezug auf ihre Antworten.</p>
       </div>
       <div class="idea-section">
         <div class="idea-section-label">Was konkret</div>
@@ -541,7 +556,7 @@
         <span class="idea-first-step-icon">→</span>
         <div>
           <div class="idea-first-step-label">Dein erster Schritt</div>
-          <p class="idea-first-step-text" id="idea-1-schritt">Der eine konkrete nächste Schritt – so spezifisch wie möglich.</p>
+          <p class="idea-first-step-text" id="idea-1-schritt">Der eine konkrete nächste Schritt   so spezifisch wie möglich.</p>
         </div>
       </div>
       <div>
@@ -693,7 +708,7 @@
         „Die kritischen Fragen in deinem Kopf sind dein Kompass."
       </h2>
       <p class="closing-motivation" id="closing-motivation">
-        Aber ein Kompass bringt dich nur weiter, wenn du anfängst zu gehen. Du hast jetzt fünf Richtungen. Keine davon ist falsch. Eine davon fühlt sich richtig an – und das weißt du bereits.
+        Aber ein Kompass bringt dich nur weiter, wenn du anfängst zu gehen. Du hast jetzt fünf Richtungen. Keine davon ist falsch. Eine davon fühlt sich richtig an   und das weißt du bereits.
       </p>
       <div class="closing-cta-label">Dein nächster Schritt</div>
       <p class="closing-cta-text" id="closing-schritt">Fang heute mit dem ersten Schritt der Idee an, die sich am meisten nach dir anfühlt.</p>
