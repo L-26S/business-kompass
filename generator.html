@@ -694,14 +694,30 @@ async function submitAnswers() {
     const data = await response.json();
     clearInterval(msgInterval);
     if (!data.result) throw new Error('Kein Ergebnis');
-    resultData = JSON.parse(data.result);
+    
+    // JSON bereinigen und parsen
+    let cleanJson = data.result
+      .replace(/```json/g, '')
+      .replace(/```/g, '')
+      .trim();
+    
+    // Ersten { und letzten } finden falls extra Text darum
+    const firstBrace = cleanJson.indexOf('{');
+    const lastBrace = cleanJson.lastIndexOf('}');
+    if (firstBrace !== -1 && lastBrace !== -1) {
+      cleanJson = cleanJson.substring(firstBrace, lastBrace + 1);
+    }
+    
+    console.log('JSON to parse:', cleanJson.substring(0, 200));
+    resultData = JSON.parse(cleanJson);
     renderResult();
     showScreen('result');
   } catch(err) {
     clearInterval(msgInterval);
+    console.error('Fehler:', err.message);
     showScreen('quiz');
     document.getElementById('error-msg').style.display = 'block';
-    document.getElementById('error-msg').textContent = 'Etwas ist schiefgelaufen. Bitte versuche es nochmal.';
+    document.getElementById('error-msg').textContent = 'Fehler: ' + err.message;
   }
 }
 
