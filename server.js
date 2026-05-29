@@ -17,36 +17,35 @@ app.post('/api/generate', async (req, res) => {
   }
 
   try {
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${process.env.GEMINI_API_KEY}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-            temperature: 0.85,
-            maxOutputTokens: 2048,
-          },
-        }),
-      }
-    );
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 2048,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
 
     const data = await response.json();
-    console.log('Gemini response:', JSON.stringify(data).substring(0, 200));
-    
+    console.log('Anthropic response status:', response.status);
+
     if (data.error) {
-      console.error('Gemini error:', data.error);
+      console.error('Anthropic error:', data.error);
       return res.status(500).json({ error: data.error.message });
     }
-    
-    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+
+    const text = data?.content?.[0]?.text || '';
     const clean = text.replace(/```json|```/g, '').trim();
-    
     console.log('Result length:', clean.length);
+
     return res.status(200).json({ result: clean });
   } catch (err) {
-    console.error('Gemini API Fehler:', err);
+    console.error('API Fehler:', err);
     return res.status(500).json({ error: 'API Fehler. Bitte nochmal versuchen.' });
   }
 });
