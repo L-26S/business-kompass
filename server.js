@@ -40,9 +40,33 @@ app.post('/api/generate', async (req, res) => {
     }
 
     const text = data?.content?.[0]?.text || '';
-    const clean = text.replace(/```json|```/g, '').trim();
+    
+    // JSON bereinigen
+    let clean = text.replace(/```json|```/g, '').trim();
+    
+    // Ersten { und letzten } extrahieren
+    const firstBrace = clean.indexOf('{');
+    const lastBrace = clean.lastIndexOf('}');
+    if (firstBrace !== -1 && lastBrace !== -1) {
+      clean = clean.substring(firstBrace, lastBrace + 1);
+    }
+    
+    // Sonderzeichen in Strings bereinigen
+    clean = clean
+      .replace(/[\u0000-\u001F\u007F-\u009F]/g, ' ')
+      .replace(/\n/g, '\\n')
+      .replace(/\r/g, '')
+      .replace(/\t/g, ' ');
+    
+    // Prüfen ob gültiges JSON
+    try {
+      JSON.parse(clean);
+    } catch(parseErr) {
+      console.error('JSON parse error:', parseErr.message);
+      console.error('Problematic JSON around error:', clean.substring(4900, 5100));
+    }
+    
     console.log('Result length:', clean.length);
-
     return res.status(200).json({ result: clean });
   } catch (err) {
     console.error('API Fehler:', err);
