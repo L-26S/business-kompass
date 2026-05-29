@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impressum   Logic | Soul</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f2e8d9;
+    --cream2: #ede0cc;
+    --brown-deep: #2c1f14;
+    --brown-mid: #4a3323;
+    --terra: #c4622d;
+    --text: #1e1208;
+    --text-mid: #4a3323;
+    --text-light: #7a6655;
+    --border: rgba(44,31,20,0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+  nav {
+    padding: 24px 56px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--border);
+    background: var(--cream);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; color: var(--brown-deep);
+    text-decoration: none;
+  }
+  .nav-back {
+    font-size: 13px; color: var(--text-light);
+    text-decoration: none; letter-spacing: 0.08em;
+  }
+  .nav-back:hover { color: var(--terra); }
+  .content {
+    max-width: 680px; margin: 0 auto;
+    padding: 64px 56px 96px;
+  }
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.25em;
+    color: var(--terra); text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px; font-weight: 400;
+    color: var(--brown-deep); margin-bottom: 48px;
+    line-height: 1.2;
+  }
+  .block {
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .block:last-child { border-bottom: none; }
+  p {
+    font-size: 16px; color: var(--text-mid);
+    line-height: 1.8; margin-bottom: 8px;
+  }
+  a { color: var(--terra); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .stand {
+    font-size: 12px; color: var(--text-light);
+    margin-top: 48px; letter-spacing: 0.08em;
+  }
+  footer {
+    background: var(--brown-deep);
+    padding: 24px 56px;
+    display: flex; justify-content: space-between;
+    align-items: center;
+  }
+  footer span { font-size: 12px; color: rgba(242,232,217,0.35); letter-spacing: 0.1em; }
+  footer a { font-size: 12px; color: rgba(242,232,217,0.35); text-decoration: none; letter-spacing: 0.1em; }
+  footer a:hover { color: rgba(242,232,217,0.7); }
+  @media (max-width: 640px) {
+    nav, .content, footer { padding-left: 24px; padding-right: 24px; }
+    h1 { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="landing-page-v2.html" class="nav-logo">Logic | Soul</a>
+  <a href="landing-page-v2.html" class="nav-back">← Zurück</a>
+</nav>
+
+<div class="content">
+  <div class="eyebrow">Rechtliches</div>
+  <h1>Impressum</h1>
+
+  <div class="block">
+    <p><strong>Yana Thomée</strong><br>
+    Hölzleswiesen 13<br>
+    70619 Stuttgart<br>
+    Deutschland</p>
+  </div>
+
+  <div class="block">
+    <p>Tel.: +4917620495934<br>
+    E-Mail: <a href="mailto:intern@logic-soul.com">intern@logic-soul.com</a></p>
+  </div>
+
+  <div class="block">
+    <p>USt-ID gemäß § 27a UStG: wird nachgereicht</p>
+  </div>
+
+  <div class="block">
+    <p>Wir sind zur Teilnahme an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle weder verpflichtet noch bereit.</p>
+    <p>Die EU-Kommission stellt eine Plattform zur Online-Streitbeilegung bereit: <a href="https://ec.europa.eu/consumers/odr" target="_blank">https://ec.europa.eu/consumers/odr</a>. Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+  </div>
+
+  <p class="stand">Stand: 28.05.2026</p>
+</div>
+
+<footer>
+  <span>© Logic | Soul</span>
+  <div style="display:flex; gap:24px;">
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+  </div>
+</footer>
+
+</body>
+</html>
