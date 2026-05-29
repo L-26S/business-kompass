@@ -435,7 +435,7 @@
 <div id="screen-loading" class="screen">
   <div class="loading-star">✦</div>
   <p class="loading-text" id="loading-text">Analysiere deine Persönlichkeit...</p>
-  <p class="loading-sub">Die KI liest alle 20 Antworten</p>
+  <p class="loading-sub">Gleich erfährst du was wirklich zu dir passt.</p>
 </div>
 
 <!-- RESULT -->
@@ -484,7 +484,12 @@ const questions = [
   { id:17, block:"Grenzen & Klarheit", blockNum:6, question:"Was willst du auf keinen Fall?", type:"multi", options:["Vor der Kamera sein","Kaltakquise / aktiv verkaufen","Technisch komplexe Systeme aufbauen","Abhängig von einem einzelnen Kunden sein","Ständige Erreichbarkeit"] },
   { id:18, block:"Grenzen & Klarheit", blockNum:6, question:"Was wäre für dich ein Zeichen dass es funktioniert?", type:"single", options:["Erste 100 Euro verdient","Erster Kunde der bezahlt hat","Ich kann meinen Job reduzieren","Ich arbeite nur noch für mich"] },
   { id:19, block:"Der letzte Filter", blockNum:7, question:"Wenn du an dein Business in 3 Jahren denkst, wie soll es sich anfühlen?", type:"text", placeholder:"Freiheit, Sinn, Anerkennung, Ruhe, Aufregung...?" },
-  { id:20, block:"Der letzte Filter", blockNum:7, question:"Was hält dich bisher davon ab zu starten?", type:"text", placeholder:"Sei ehrlich, keine falsche Antwort hier..." }
+  { id:20, block:"Der letzte Filter", blockNum:7, question:"Was hält dich bisher davon ab zu starten?", type:"text", placeholder:"Sei ehrlich, keine falsche Antwort hier..." },
+  { id:21, block:"Deine Geschichte", blockNum:8, question:"Was begleitet dich seit Jahren im Alltag, womit andere kaum Erfahrung haben?", type:"text", placeholder:"Eine Diagnose, eine Einschränkung, eine Besonderheit, etwas das dich immer wieder beschäftigt..." },
+  { id:22, block:"Deine Geschichte", blockNum:8, question:"Welches Thema beschäftigt dich gerade tief in dir, das dich nicht loslässt?", type:"text", placeholder:"Etwas das du noch niemandem richtig erklärt hast aber das immer wieder auftaucht..." },
+  { id:23, block:"Deine Geschichte", blockNum:8, question:"Gibt es etwas in deinem Leben das du lange als Schwäche gesehen hast, das aber in Wirklichkeit eine Stärke sein könnte?", type:"text", placeholder:"Oft sind unsere größten Stärken das was wir am längsten versteckt haben..." },
+  { id:24, block:"Deine Geschichte", blockNum:8, question:"Was würdest du tun wenn du weißt dass du nicht scheitern kannst?", type:"text", placeholder:"Keine Einschränkungen, kein Geld, keine Zeit, keine Angst..." },
+  { id:25, block:"Deine Geschichte", blockNum:8, question:"Wenn du einer einzigen Person auf der Welt wirklich helfen könntest, wer wäre das und womit?", type:"text", placeholder:"Vielleicht jemand der so ist wie du früher warst, oder jemand der kämpft womit du gekämpft hast..." }
 ];
 
 const blocks = [
@@ -494,7 +499,8 @@ const blocks = [
   { num:4, name:"Verborgene Stärken" },
   { num:5, name:"Leben & Kontext" },
   { num:6, name:"Grenzen & Klarheit" },
-  { num:7, name:"Der letzte Filter" }
+  { num:7, name:"Der letzte Filter" },
+  { num:8, name:"Deine Geschichte" }
 ];
 
 let current = 0;
@@ -502,10 +508,10 @@ let answers = {};
 let resultData = null;
 
 const loadingMessages = [
-  "Analysiere deine Persönlichkeit...",
-  "Erkenne deine Stärken...",
-  "Verbinde deine Antworten...",
-  "Entwickle deine 5 Ideen...",
+  "Deine Antworten werden gelesen...",
+  "Deine Stärken werden erkannt...",
+  "Deine Persönlichkeit wird gespiegelt...",
+  "Deine 5 Ideen entstehen gerade...",
   "Fast fertig..."
 ];
 
@@ -523,7 +529,7 @@ function startQuiz() {
 
 function renderQuestion() {
   const q = questions[current];
-  document.getElementById('quiz-count').textContent = (current + 1) + ' / 20';
+  document.getElementById('quiz-count').textContent = (current + 1) + ' / 25';
   document.getElementById('progress-bar').style.width = (current / 20 * 100) + '%';
 
   // Block dots
@@ -631,7 +637,7 @@ function buildPrompt() {
     return `Frage ${q.id} (${q.block}): ${q.question}\nAntwort: ${answerText}`;
   }).join("\n\n");
 
-  return `Du analysierst 20 ehrliche Antworten einer Person und erstellst daraus 5 Business-Ideen die wirklich zu ihr passen.
+  return `Du analysierst 25 ehrliche Antworten einer Person und erstellst daraus 5 Business-Ideen die wirklich zu ihr passen.
 
 SPRACHE UND TON:
 Schreibe wie ein guter Freund der ehrlich ist und genau zugehört hat. Warm, direkt, klar. Keine Bindestriche als Aufzählungszeichen. Keine typischen KI-Phrasen wie "du hast das Potenzial", "mit deiner Leidenschaft" oder "als kreativer Mensch". Keine Coaching-Sprache. Fließende Sätze die man gerne liest.
