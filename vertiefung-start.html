@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dein 30-Tage Businessplan – Jetzt starten</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f2e8d9;
+    --cream2: #ede0cc;
+    --beige: #e8d9c4;
+    --brown-deep: #2c1f14;
+    --brown-mid: #4a3323;
+    --brown-light: #7a5c44;
+    --terra: #c4622d;
+    --terra-light: #d4784a;
+    --text: #1e1208;
+    --text-mid: #4a3323;
+    --text-light: #7a6655;
+    --border: rgba(44,31,20,0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+  .screen { display: none; min-height: 100vh; }
+  .screen.active { display: flex; flex-direction: column; }
+
+  /* NAV */
+  nav {
+    background: var(--brown-deep);
+    padding: 18px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-shrink: 0;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px; color: var(--cream);
+    text-decoration: none; letter-spacing: 0.05em;
+  }
+  .nav-tag {
+    font-size: 11px; color: var(--terra);
+    letter-spacing: 0.2em; text-transform: uppercase;
+  }
+
+  /* ENTRY SCREEN */
+  .entry-inner {
+    max-width: 600px; width: 100%;
+    margin: 0 auto; padding: 48px 24px 64px;
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; text-align: center; gap: 0;
+  }
+  .compass-icon { margin-bottom: 20px; }
+  .entry-badge {
+    background: rgba(196,98,45,0.08);
+    border: 1px solid rgba(196,98,45,0.25);
+    color: var(--terra); padding: 5px 16px;
+    font-size: 11px; letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 20px;
+  }
+  .entry-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px; font-weight: 400;
+    color: var(--brown-deep); margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .entry-sub {
+    font-size: 16px; color: var(--text-mid);
+    line-height: 1.7; max-width: 420px;
+    margin-bottom: 40px;
+  }
+
+  /* PATH CARDS */
+  .path-cards {
+    display: flex; flex-direction: column;
+    gap: 12px; width: 100%; margin-bottom: 24px;
+  }
+  .path-card {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    cursor: pointer; text-align: left;
+    transition: all 0.2s;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .path-card:hover { border-color: var(--terra); transform: translateY(-1px); }
+  .path-card.selected { border-color: var(--terra); background: rgba(196,98,45,0.04); }
+  .path-icon { font-size: 24px; flex-shrink: 0; }
+  .path-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; color: var(--brown-deep);
+    margin-bottom: 4px;
+  }
+  .path-desc { font-size: 13px; color: var(--text-light); line-height: 1.5; }
+  .path-arrow { color: var(--terra); font-size: 18px; margin-left: auto; flex-shrink: 0; }
+
+  /* DIVIDER */
+  .or-divider {
+    display: flex; align-items: center; gap: 12px;
+    width: 100%; margin: 8px 0;
+    color: var(--text-light); font-size: 12px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .or-divider::before, .or-divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+
+  /* QUIZ SCREEN */
+  .quiz-inner {
+    max-width: 600px; width: 100%;
+    margin: 0 auto; padding: 32px 24px 48px;
+    display: flex; flex-direction: column; gap: 20px;
+    flex: 1;
+  }
+  .quiz-header {
+    display: flex; justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border); padding-bottom: 16px;
+  }
+  .quiz-logo {
+    font-size: 11px; letter-spacing: 0.2em;
+    color: var(--brown-deep); text-transform: uppercase;
+    font-family: 'Playfair Display', serif;
+  }
+  .quiz-count { font-size: 13px; color: var(--terra); font-weight: 500; }
+  .progress-outer { height: 2px; background: var(--beige); }
+  .progress-inner { height: 100%; background: var(--terra); transition: width 0.4s ease; }
+  .step-label {
+    font-size: 11px; letter-spacing: 0.15em;
+    color: var(--terra); text-transform: uppercase;
+  }
+  .card {
+    background: var(--brown-deep);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 28px 24px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .question-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 400;
+    line-height: 1.4; color: var(--cream);
+  }
+  .question-hint {
+    font-size: 13px; color: rgba(242,232,217,0.45);
+    line-height: 1.6; font-style: italic;
+  }
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .option-btn {
+    padding: 12px 16px;
+    border: 1px solid var(--beige);
+    cursor: pointer; text-align: left;
+    font-size: 14px; line-height: 1.4;
+    transition: all 0.15s;
+    background: var(--cream); color: var(--brown-deep);
+    font-family: 'DM Sans', sans-serif; font-weight: 300;
+  }
+  .option-btn.selected { background: var(--terra); color: var(--cream); border-color: var(--terra); }
+  .option-btn:hover:not(.selected) { background: var(--cream2); }
+  .multi-hint { font-size: 11px; color: rgba(242,232,217,0.4); margin-bottom: 4px; letter-spacing: 0.1em; text-transform: uppercase; }
+  textarea, input[type="text"] {
+    background: rgba(242,232,217,0.07);
+    border: 1px solid rgba(242,232,217,0.15);
+    padding: 12px 14px; color: var(--cream);
+    font-size: 15px; line-height: 1.6;
+    resize: vertical; outline: none;
+    font-family: 'Playfair Display', serif;
+    width: 100%;
+  }
+  textarea::placeholder, input::placeholder { color: rgba(242,232,217,0.3); }
+
+  /* PDF Upload */
+  .upload-area {
+    border: 2px dashed rgba(242,232,217,0.2);
+    padding: 24px; text-align: center;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .upload-area:hover { border-color: var(--terra); }
+  .upload-area.uploaded { border-color: var(--terra); background: rgba(196,98,45,0.08); }
+  .upload-icon { font-size: 32px; margin-bottom: 8px; }
+  .upload-text { font-size: 14px; color: rgba(242,232,217,0.6); line-height: 1.5; }
+  .upload-text strong { color: var(--terra); }
+  #pdf-input { display: none; }
+
+  /* Navigation */
+  .quiz-nav {
+    display: flex; justify-content: space-between;
+    align-items: center; gap: 12px;
+  }
+  .btn-back {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--text-light); padding: 12px 20px;
+    cursor: pointer; font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-next {
+    background: var(--brown-deep); color: var(--cream);
+    border: none; padding: 14px 32px;
+    font-size: 14px; font-weight: 500;
+    cursor: pointer; margin-left: auto;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    font-family: 'DM Sans', sans-serif; transition: all 0.2s;
+  }
+  .btn-next:disabled { opacity: 0.35; cursor: not-allowed; }
+  .btn-next:not(:disabled):hover { background: var(--terra); }
+
+  /* PAYMENT */
+  #screen-payment {
+    justify-content: center; align-items: center;
+    text-align: center; padding: 48px 24px;
+  }
+  .payment-inner { max-width: 480px; }
+  .payment-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; color: var(--brown-deep);
+    margin-bottom: 12px; font-weight: 400;
+  }
+  .payment-title em { font-style: italic; color: var(--terra); }
+  .payment-sub {
+    font-size: 16px; color: var(--text-mid);
+    line-height: 1.7; margin-bottom: 32px;
+  }
+  .what-you-get {
+    background: white; border: 1px solid var(--border);
+    padding: 20px 24px; margin-bottom: 28px; text-align: left;
+  }
+  .what-label {
+    font-size: 11px; letter-spacing: 0.2em; color: var(--terra);
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .what-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    margin-bottom: 8px; font-size: 14px; color: var(--text-mid);
+    line-height: 1.5;
+  }
+  .what-item::before { content: '✦'; color: var(--terra); font-size: 10px; padding-top: 3px; flex-shrink: 0; }
+  .btn-buy {
+    background: var(--terra); color: var(--cream);
+    border: none; padding: 16px 40px;
+    font-size: 15px; font-weight: 500;
+    cursor: pointer; letter-spacing: 0.05em;
+    font-family: 'DM Sans', sans-serif;
+    text-decoration: none; display: inline-block;
+    margin-bottom: 10px; transition: background 0.2s; width: 100%;
+  }
+  .btn-buy:hover { background: var(--terra-light); }
+  .payment-note { font-size: 11px; color: var(--text-light); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 24px; }
+  .btn-already {
+    background: transparent; border: 1px solid var(--terra);
+    color: var(--terra); padding: 12px 28px;
+    cursor: pointer; font-size: 13px;
+    font-family: 'DM Sans', sans-serif; transition: all 0.2s; width: 100%;
+  }
+  .btn-already:hover { background: var(--terra); color: var(--cream); }
+
+  /* LOADING */
+  #screen-loading {
+    justify-content: center; align-items: center; text-align: center;
+  }
+  .loading-star {
+    font-size: 40px; color: var(--terra); margin-bottom: 24px;
+    display: inline-block; animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.9); }
+  }
+  .loading-text { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--brown-deep); margin-bottom: 8px; }
+  .loading-sub { font-size: 14px; color: var(--text-light); }
+
+  /* RESULT */
+  #screen-result { background: var(--cream); }
+  .result-inner {
+    max-width: 720px; width: 100%;
+    margin: 0 auto; padding: 32px 24px 64px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .result-header {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--border); padding-bottom: 16px;
+  }
+  .result-badge { font-size: 11px; color: var(--terra); letter-spacing: 0.2em; text-transform: uppercase; }
+  .result-intro {
+    background: rgba(196,98,45,0.06); border: 1px solid rgba(196,98,45,0.2); padding: 24px;
+  }
+  .result-intro-label { font-size: 11px; letter-spacing: 0.2em; color: var(--terra); text-transform: uppercase; margin-bottom: 10px; }
+  .result-intro-text { font-family: 'Playfair Display', serif; font-size: 16px; font-style: italic; line-height: 1.7; color: var(--text-mid); }
+
+  /* Week cards */
+  .week-card { background: white; border: 1px solid var(--border); overflow: hidden; }
+  .week-header {
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 24px; background: var(--brown-deep);
+  }
+  .week-num { font-size: 11px; color: var(--terra); font-family: 'DM Sans', sans-serif; font-weight: 500; letter-spacing: 0.1em; min-width: 48px; }
+  .week-title { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--cream); font-weight: 400; flex: 1; }
+  .week-focus { font-size: 12px; color: rgba(242,232,217,0.5); font-style: italic; }
+  .week-body { padding: 20px 24px; display: flex; flex-direction: column; gap: 14px; }
+  .task-item { display: flex; gap: 14px; align-items: flex-start; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+  .task-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .task-day { font-size: 11px; color: var(--terra); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; min-width: 32px; padding-top: 2px; }
+  .task-content {}
+  .task-title { font-size: 15px; color: var(--brown-deep); margin-bottom: 4px; font-weight: 400; }
+  .task-desc { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+
+  /* Skills needed */
+  .skills-card { background: var(--brown-deep); padding: 24px; }
+  .skills-label { font-size: 11px; letter-spacing: 0.2em; color: var(--terra); text-transform: uppercase; margin-bottom: 16px; }
+  .skill-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+  .skill-item:last-child { margin-bottom: 0; }
+  .skill-status { font-size: 11px; padding: 2px 8px; letter-spacing: 0.1em; flex-shrink: 0; }
+  .skill-status.learn { background: rgba(196,98,45,0.3); color: var(--terra-light); }
+  .skill-status.hire { background: rgba(242,232,217,0.1); color: rgba(242,232,217,0.6); }
+  .skill-text { font-size: 14px; color: rgba(242,232,217,0.8); line-height: 1.5; }
+
+  /* Motivation */
+  .motivation-card { background: var(--cream2); border: 1px solid var(--border); padding: 28px 24px; text-align: center; }
+  .motivation-icon { font-size: 22px; color: var(--terra); margin-bottom: 12px; }
+  .motivation-text { font-family: 'Playfair Display', serif; font-size: 16px; font-style: italic; line-height: 1.8; color: var(--text-mid); }
+
+  .btn-pdf {
+    background: var(--brown-deep); color: var(--cream); border: none;
+    padding: 14px 32px; font-size: 14px; font-weight: 500;
+    cursor: pointer; letter-spacing: 0.08em; text-transform: uppercase;
+    font-family: 'DM Sans', sans-serif; transition: background 0.2s; align-self: center;
+  }
+  .btn-pdf:hover { background: var(--terra); }
+
+  footer {
+    background: var(--brown-deep); padding: 20px 24px;
+    display: flex; justify-content: space-between; align-items: center; margin-top: auto;
+  }
+  footer span { font-size: 12px; color: rgba(242,232,217,0.35); letter-spacing: 0.1em; }
+  footer a { font-size: 12px; color: rgba(242,232,217,0.35); text-decoration: none; letter-spacing: 0.1em; }
+  footer a:hover { color: rgba(242,232,217,0.7); }
+
+  .error-msg { color: #c0392b; font-size: 13px; padding: 10px 14px; background: rgba(192,57,43,0.08); margin-top: 8px; }
+
+  /* Legal Card */
+  .legal-card { border: 1px solid var(--border); overflow: hidden; }
+  .legal-header {
+    background: var(--cream2); padding: 16px 24px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; border: none; width: 100%; text-align: left;
+  }
+  .legal-header-title { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--brown-deep); flex: 1; }
+  .legal-header-toggle { color: var(--terra); font-size: 16px; }
+  .legal-body { padding: 20px 24px; display: none; flex-direction: column; gap: 12px; }
+  .legal-body.open { display: flex; }
+  .legal-item { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--text-mid); line-height: 1.6; }
+  .legal-item::before { content: '✦'; color: var(--terra); font-size: 9px; padding-top: 4px; flex-shrink: 0; }
+  .legal-link { color: var(--terra); text-decoration: none; font-size: 13px; display: inline-block; margin-top: 8px; }
+  .legal-link:hover { text-decoration: underline; }
+  .legal-disclaimer {
+    background: var(--brown-deep); padding: 20px 24px;
+    font-size: 13px; color: rgba(242,232,217,0.6); line-height: 1.7;
+    font-style: italic;
+  }
+
+  @media print {
+    nav, footer, .btn-pdf { display: none !important; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    .legal-body { display: flex !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ENTRY SCREEN -->
+<div id="screen-entry" class="screen active">
+  <nav>
+    <span class="nav-logo">Dein Business Kompass</span>
+    <span class="nav-tag">Business Kompass Vertiefung</span>
+  </nav>
+  <div class="entry-inner">
+    <svg class="compass-icon" width="56" height="56" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <line x1="32" y1="4" x2="32" y2="14" stroke="#c4622d" stroke-width="1" opacity="0.5"/>
+      <line x1="32" y1="50" x2="32" y2="60" stroke="#c4622d" stroke-width="1" opacity="0.5"/>
+      <line x1="4" y1="32" x2="14" y2="32" stroke="#c4622d" stroke-width="1" opacity="0.5"/>
+      <line x1="50" y1="32" x2="60" y2="32" stroke="#c4622d" stroke-width="1" opacity="0.5"/>
+      <path d="M32,14 L35,26 L32,22 L29,26 Z" fill="#2c1f14"/>
+      <path d="M32,50 L35,38 L32,42 L29,38 Z" fill="#2c1f14"/>
+      <path d="M14,32 L26,29 L22,32 L26,35 Z" fill="#2c1f14"/>
+      <path d="M50,32 L38,29 L42,32 L38,35 Z" fill="#2c1f14"/>
+      <path d="M45,19 L35,29 L37,25 L33,27 Z" fill="#c4622d" opacity="0.7"/>
+      <path d="M19,45 L29,35 L27,39 L31,37 Z" fill="#c4622d" opacity="0.7"/>
+      <path d="M19,19 L29,29 L25,27 L27,31 Z" fill="#c4622d" opacity="0.7"/>
+      <path d="M45,45 L35,35 L39,37 L37,33 Z" fill="#c4622d" opacity="0.7"/>
+      <circle cx="32" cy="32" r="3.5" fill="#c4622d"/>
+      <circle cx="32" cy="32" r="1.8" fill="#2c1f14"/>
+    </svg>
+
+    <div class="entry-badge">Business Kompass Vertiefung</div>
+    <h1 class="entry-title">Deine Idee hat einen Namen.<br>Jetzt bekommt sie einen Plan.</h1>
+    <p class="entry-sub">Du weißt was du aufbauen willst. Wir zeigen dir wie du in 30 Tagen wirklich anfängst.</p>
+
+    <div class="path-cards">
+      <div class="path-card" onclick="selectPath('pdf')">
+        <div class="path-icon">📄</div>
+        <div>
+          <div class="path-title">Ich habe den Business Kompass gemacht</div>
+          <div class="path-desc">PDF hochladen und direkt mit deinem Ergebnis weitermachen</div>
+        </div>
+        <div class="path-arrow">→</div>
+      </div>
+
+      <div class="or-divider"><span>oder</span></div>
+
+      <div class="path-card" onclick="selectPath('own')">
+        <div class="path-icon">💡</div>
+        <div>
+          <div class="path-title">Ich weiß bereits was ich aufbauen will</div>
+          <div class="path-desc">Kein Test nötig, ich habe meine Idee bereits</div>
+        </div>
+        <div class="path-arrow">→</div>
+      </div>
+
+      <div class="or-divider"><span>oder</span></div>
+
+      <div class="path-card" onclick="window.location.href='index.html'">
+        <div class="path-icon">🧭</div>
+        <div>
+          <div class="path-title">Ich habe noch keine Idee</div>
+          <div class="path-desc">Erst zum Business Kompass Test – 5 Ideen aus deiner Persönlichkeit</div>
+        </div>
+        <div class="path-arrow">→</div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <a href="https://kompass.logic-soul.com" style="font-size:12px; color:rgba(242,232,217,0.35); text-decoration:none; letter-spacing:0.1em;">© Logic | Soul</a>
+    <div style="display:flex; gap:20px;">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+    </div>
+  </footer>
+</div>
+
+<!-- QUIZ SCREEN -->
+<div id="screen-quiz" class="screen">
+  <nav>
+    <span class="nav-logo">Dein Business Kompass</span>
+    <span class="nav-tag">Vertiefung</span>
+  </nav>
+  <div class="quiz-inner">
+    <div class="quiz-header">
+      <span class="quiz-logo">Business Kompass Vertiefung</span>
+      <span class="quiz-count" id="quiz-count">1 / 8</span>
+    </div>
+    <div class="progress-outer">
+      <div class="progress-inner" id="progress-bar" style="width:0%"></div>
+    </div>
+    <div class="step-label" id="step-label">Deine Idee</div>
+    <div class="card" id="question-card">
+      <div class="question-text" id="question-text"></div>
+      <div class="question-hint" id="question-hint"></div>
+      <div id="question-input"></div>
+      <div class="error-msg" id="error-msg" style="display:none"></div>
+    </div>
+    <div class="quiz-nav">
+      <button class="btn-back" id="btn-back" onclick="prevQuestion()" style="display:none">← Zurück</button>
+      <button class="btn-next" id="btn-next" onclick="nextQuestion()" disabled>Weiter →</button>
+    </div>
+  </div>
+  <footer>
+    <a href="https://kompass.logic-soul.com" style="font-size:12px; color:rgba(242,232,217,0.35); text-decoration:none; letter-spacing:0.1em;">© Logic | Soul</a>
+    <div style="display:flex; gap:20px;">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+    </div>
+  </footer>
+</div>
+
+<!-- LOADING SCREEN -->
+<div id="screen-loading" class="screen">
+  <nav>
+    <span class="nav-logo">Dein Business Kompass</span>
+    <span class="nav-tag">Vertiefung</span>
+  </nav>
+  <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:48px 24px;">
+    <div class="loading-star">✦</div>
+    <p class="loading-text" id="loading-text">Deine Idee wird analysiert...</p>
+    <p class="loading-sub">Dein persönlicher 30-Tage Plan entsteht gerade.</p>
+  </div>
+</div>
+
+<!-- RESULT SCREEN -->
+<div id="screen-result" class="screen">
+  <nav>
+    <span class="nav-logo">Dein Business Kompass</span>
+    <span class="nav-tag">Dein 30-Tage Plan</span>
+  </nav>
+  <div class="result-inner">
+    <div class="result-header">
+      <span class="quiz-logo">Business Kompass Vertiefung</span>
+      <span class="result-badge">✦ Dein Starterplan</span>
+    </div>
+    <div class="result-intro">
+      <div class="result-intro-label">Deine Ausgangslage</div>
+      <p class="result-intro-text" id="result-intro"></p>
+    </div>
+    <div id="result-weeks"></div>
+    <div class="skills-card" id="result-skills" style="display:none">
+      <div class="skills-label">Fähigkeiten und Ressourcen</div>
+      <div id="skills-list"></div>
+    </div>
+    <div class="motivation-card">
+      <div class="motivation-icon">✦</div>
+      <p class="motivation-text" id="result-motivation"></p>
+    </div>
+    <!-- Legal Section -->
+    <div id="result-legal" style="display:none; flex-direction:column; gap:12px;">
+      <div style="font-size:11px; letter-spacing:0.2em; color:var(--terra); text-transform:uppercase; padding-top:8px; border-top:1px solid var(--border);">Wichtige Hinweise für deinen Start</div>
+
+      <div class="legal-card">
+        <button class="legal-header" onclick="toggleLegal('legal-website')">
+          <span style="font-size:18px;">🌐</span>
+          <span class="legal-header-title">Wenn du eine Website baust</span>
+          <span class="legal-header-toggle">+</span>
+        </button>
+        <div class="legal-body" id="legal-website">
+          <div class="legal-item">Impressum: In Deutschland Pflicht für jede gewerbliche Website. Name, Adresse, E-Mail müssen sichtbar sein.</div>
+          <div class="legal-item">Datenschutzerklärung: Pflicht sobald du Daten sammelst, auch wenn es nur Google Analytics oder ein Kontaktformular ist.</div>
+          <div class="legal-item">Cookie-Banner: Notwendig wenn du Tracking-Tools oder externe Dienste einbindest.</div>
+          <div class="legal-item">AGB: Nicht immer Pflicht aber empfehlenswert sobald du Produkte verkaufst.</div>
+          <div class="legal-item">SSL-Zertifikat: Deine Website muss mit https laufen. Die meisten Hoster bieten das kostenlos an.</div>
+          <a href="https://www.it-recht-kanzlei.de" target="_blank" class="legal-link">→ IT-Recht Kanzlei für rechtssichere Texte</a>
+        </div>
+      </div>
+
+      <div class="legal-card">
+        <button class="legal-header" onclick="toggleLegal('legal-gruendung')">
+          <span style="font-size:18px;">📋</span>
+          <span class="legal-header-title">Gründung in Deutschland</span>
+          <span class="legal-header-toggle">+</span>
+        </button>
+        <div class="legal-body" id="legal-gruendung">
+          <div class="legal-item">Gewerbeanmeldung: Pflicht für gewerbliche Tätigkeiten. Kosten zwischen 10 und 65 Euro je nach Stadt. Online oder beim Gewerbeamt.</div>
+          <div class="legal-item">Kleinunternehmerregelung: Bis 22.000 Euro Umsatz im ersten Jahr kannst du auf Umsatzsteuer verzichten. Vereinfacht vieles am Anfang.</div>
+          <div class="legal-item">Steuerberater: Empfehlenswert von Anfang an. Kostet Geld, spart aber mehr und schützt vor teuren Fehlern.</div>
+          <div class="legal-item">Krankenversicherung: Als Selbstständiger bist du nicht mehr automatisch versichert. Frühzeitig klären.</div>
+          <div class="legal-item">Geschäftskonto: Pflicht für Gewerbetreibende. Privates Konto und Geschäftskonto strikt trennen.</div>
+          <a href="https://www.gruenderplattform.de" target="_blank" class="legal-link">→ Gründerplattform – offizielle Informationen zur Gründung</a>
+        </div>
+      </div>
+
+      <div class="legal-card">
+        <button class="legal-header" onclick="toggleLegal('legal-dsgvo')">
+          <span style="font-size:18px;">🔒</span>
+          <span class="legal-header-title">DSGVO Basics</span>
+          <span class="legal-header-toggle">+</span>
+        </button>
+        <div class="legal-body" id="legal-dsgvo">
+          <div class="legal-item">Du darfst Kundendaten nur für den Zweck verwenden für den sie gegeben wurden. Keine Weitergabe ohne Einwilligung.</div>
+          <div class="legal-item">Newsletter: Du brauchst eine ausdrückliche Einwilligung. Double-Opt-In ist Pflicht.</div>
+          <div class="legal-item">B2B besonders wichtig: Im Geschäftskundenbereich gelten strenge DSGVO-Regeln. Auftragsverarbeitungsverträge mit Dienstleistern können notwendig sein.</div>
+          <div class="legal-item">Recht auf Löschung: Kunden können verlangen dass du ihre Daten löschst. Du musst dem nachkommen.</div>
+          <div class="legal-item">Bußgelder: DSGVO-Verstöße können teuer werden. Lieber von Anfang an richtig machen.</div>
+          <a href="https://www.datenschutz.org/dsgvo-checkliste" target="_blank" class="legal-link">→ DSGVO Checkliste für Selbstständige</a>
+        </div>
+      </div>
+
+      <div class="legal-card">
+        <button class="legal-header" onclick="toggleLegal('legal-versicherung')">
+          <span style="font-size:18px;">🛡️</span>
+          <span class="legal-header-title">Versicherungen</span>
+          <span class="legal-header-toggle">+</span>
+        </button>
+        <div class="legal-body" id="legal-versicherung">
+          <div class="legal-item">Berufshaftpflicht: Schützt dich wenn du durch deine Arbeit Schäden verursachst. Für Berater und Coaches besonders wichtig.</div>
+          <div class="legal-item">Betriebshaftpflicht: Wenn Kunden zu dir kommen oder du physische Produkte verkaufst.</div>
+          <div class="legal-item">Berufsunfähigkeitsversicherung: Oft vergessen, aber als Selbstständiger besonders wichtig da kein Arbeitgeber absichert.</div>
+        </div>
+      </div>
+
+      <div class="legal-disclaimer">
+        Diese Hinweise sind allgemeiner Natur und ersetzen keine professionelle Rechts- oder Steuerberatung. Bei konkreten Fragen empfehlen wir dir einen Steuerberater oder Anwalt hinzuzuziehen.
+      </div>
+    </div>
+
+    <button class="btn-pdf" onclick="window.print()">Als PDF speichern →</button>
+  </div>
+  <footer>
+    <a href="https://kompass.logic-soul.com" style="font-size:12px; color:rgba(242,232,217,0.35); text-decoration:none; letter-spacing:0.1em;">© Logic | Soul</a>
+    <div style="display:flex; gap:20px;">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+    </div>
+  </footer>
+</div>
+
+<input type="file" id="pdf-input" accept=".pdf,.txt" onchange="handleFileUpload(this)">
+
+<script>
+let path = null;
+let answers = {};
+let current = 0;
+let pdfContent = '';
+let resultData = null;
+
+const loadingMessages = [
+  "Deine Idee wird analysiert...",
+  "Fähigkeiten werden eingeschätzt...",
+  "Wochenplan wird erstellt...",
+  "Konkrete Aufgaben werden formuliert...",
+  "Fast fertig..."
+];
+
+// Questions for PDF path (8 questions)
+const pdfQuestions = [
+  {
+    id: 'pdf_upload',
+    step: 'Dein Ergebnis',
+    question: 'Lade dein Business Kompass Ergebnis hoch',
+    hint: 'Das PDF das du am Ende des Tests gespeichert hast.',
+    type: 'upload'
+  },
+  {
+    id: 'top_idea',
+    step: 'Deine Wahl',
+    question: 'Welche Idee möchtest du vertiefen?',
+    hint: 'Schreib die Idee in deinen eigenen Worten.',
+    type: 'text',
+    placeholder: 'Z.B. Online-Coaching für Eltern mit ADHS-Kindern...'
+  },
+  {
+    id: 'first_thoughts',
+    step: 'Deine Gedanken',
+    question: 'Was sind deine ersten Gedanken dazu?',
+    hint: 'Keine Angst wenn du noch nicht viel weißt. Auch "ich habe keine Ahnung wie ich anfange" ist eine gültige Antwort.',
+    type: 'text',
+    placeholder: 'Was geht dir durch den Kopf wenn du an diese Idee denkst?'
+  },
+  {
+    id: 'skills',
+    step: 'Deine Fähigkeiten',
+    question: 'Welche relevanten Fähigkeiten bringst du bereits mit?',
+    hint: 'Denk an technische Skills, Erfahrungen, Ausbildungen, aber auch Soft Skills.',
+    type: 'text',
+    placeholder: 'Z.B. Ich kann gut schreiben, habe Erfahrung mit Social Media, kenne mich mit Excel aus...'
+  },
+  {
+    id: 'learn',
+    step: 'Deine Bereitschaft',
+    question: 'Was bist du bereit zu lernen?',
+    hint: 'Sei ehrlich. Nicht alles muss man selbst können.',
+    type: 'text',
+    placeholder: 'Z.B. Ich bin bereit Canva zu lernen aber keine Programmierung...'
+  },
+  {
+    id: 'time',
+    step: 'Dein Rahmen',
+    question: 'Wie viel Zeit hast du pro Woche realistisch?',
+    type: 'single',
+    options: ['2 bis 5 Stunden', '5 bis 10 Stunden', '10 bis 20 Stunden', 'Mehr als 20 Stunden']
+  },
+  {
+    id: 'budget',
+    step: 'Dein Rahmen',
+    question: 'Was ist dein Startbudget?',
+    type: 'single',
+    options: ['Kein Budget, nur Zeit', 'Bis 200 Euro', 'Bis 500 Euro', 'Bis 1.000 Euro', 'Budget ist kein Hindernis']
+  },
+  {
+    id: 'goal30',
+    step: 'Dein Ziel',
+    question: 'Was soll am Ende der 30 Tage stehen?',
+    type: 'single',
+    options: [
+      'Erste zahlende Kunden gewinnen',
+      'Ein fertiges Angebot das ich verkaufen kann',
+      'Erste Sichtbarkeit aufgebaut haben',
+      'Den ersten Umsatz generiert haben',
+      'Einfach angefangen haben und wissen ob es funktioniert'
+    ]
+  }
+];
+
+const ownQuestions = [
+  { id:'own_idea', step:'Deine Idee', question:'Was genau ist deine Business-Idee?', hint:'Beschreibe sie so konkret wie möglich.', type:'text', placeholder:'Z.B. Ein digitales Produkt für Menschen die mit Stress umgehen lernen wollen...' },
+  { id:'why', step:'Deine Idee', question:'Warum genau diese Idee? Was verbindet dich damit?', hint:'Die ehrliche Antwort hier macht deinen Plan viel stärker.', type:'text', placeholder:'Persönliche Geschichte, eigene Erfahrung, beobachtetes Problem...' },
+  { id:'market', step:'Deine Idee', question:'Für wen ist dein Angebot?', type:'single', options:['Privatkunden (B2C)', 'Unternehmen und Selbstständige (B2B)', 'Beides'] },
+  { id:'target', step:'Deine Idee', question:'Wer ist deine Wunschperson die du erreichen willst?', hint:'Je konkreter desto besser.', type:'text', placeholder:'Z.B. Berufstätige Mütter zwischen 30 und 45...' },
+  { id:'format', step:'Dein Format', question:'In welchem Format stellst du dir dein Angebot vor?', type:'multi', options:['Digitales Produkt (PDF, Kurs, Template)', 'Coaching oder Beratung', 'Community oder Membership', 'App oder Tool', 'Content und Werbung', 'Physisches Produkt', 'Dienstleistung vor Ort', 'Ich weiß es noch nicht'] },
+  { id:'app_type', step:'Dein Format', question:'Falls du an eine App oder ein Tool denkst: Was schwebt dir vor?', hint:'Eine Web-App läuft im Browser und ist viel einfacher umzusetzen als eine App aus dem App Store. Der Unterschied ist enorm in Zeit und Kosten.', type:'single', options:['Eine Web-App im Browser reicht mir völlig','Es muss eine App aus dem App Store sein','Ich kenne den Unterschied noch nicht genau','Ich denke nicht an eine App'], conditionalOn:'format', conditionalValue:'App oder Tool' },
+  { id:'coaching_cert', step:'Dein Format', question:'Falls du Coaching oder Beratung anbietest: Hast du eine relevante Ausbildung oder Zertifizierung?', hint:'In manchen Bereichen wie Ernährung, Psychologie oder Finanzberatung gibt es rechtliche Anforderungen. Das ist wichtig zu wissen.', type:'single', options:['Ja, ich habe eine Ausbildung oder Zertifizierung','Nein, aber ich plane eine','Nein, mein Bereich braucht keine Zertifizierung','Ich bin nicht sicher'], conditionalOn:'format', conditionalValue:'Coaching oder Beratung' },
+  { id:'digital_platform', step:'Dein Format', question:'Falls du ein digitales Produkt planst: Weißt du schon wo du es verkaufen willst?', hint:'Jede Plattform hat andere Kosten und Anforderungen.', type:'single', options:['Digistore24 oder Digistore','Gumroad','Eigene Website','Teachable oder Thinkific','Ich weiß es noch nicht'], conditionalOn:'format', conditionalValue:'Digitales Produkt (PDF, Kurs, Template)' },
+  { id:'community_platform', step:'Dein Format', question:'Falls du eine Community planst: Welche Plattform schwebt dir vor?', hint:'Kostenlose Tools wie WhatsApp oder Telegram funktionieren am Anfang, haben aber Grenzen.', type:'single', options:['WhatsApp oder Telegram','Skool','Circle','Facebook Gruppe','Eigene Plattform','Ich weiß es noch nicht'], conditionalOn:'format', conditionalValue:'Community oder Membership' },
+  { id:'physical_logistics', step:'Dein Format', question:'Falls du ein physisches Produkt planst: Wie soll die Logistik aussehen?', hint:'Lager, Versand und Herstellung sind oft unterschätzte Aufwände.', type:'single', options:['Ich produziere und versende selbst','Dropshipping (kein eigenes Lager)','Print-on-Demand','Ich habe noch keine Lösung'], conditionalOn:'format', conditionalValue:'Physisches Produkt' },
+  { id:'local_trade', step:'Dein Format', question:'Falls du eine Dienstleistung vor Ort anbietest: Hast du ein Gewerbe angemeldet?', hint:'Ohne Gewerbeanmeldung darf man in Deutschland keine gewerbliche Tätigkeit ausüben.', type:'single', options:['Ja, Gewerbe ist angemeldet','Nein, aber ich plane es','Ich bin freiberuflich tätig','Noch nicht entschieden'], conditionalOn:'format', conditionalValue:'Dienstleistung vor Ort' },
+  { id:'skills', step:'Deine Fähigkeiten', question:'Welche relevanten Fähigkeiten bringst du bereits mit?', hint:'Technische Skills, Erfahrungen, Ausbildungen, Soft Skills.', type:'text', placeholder:'Z.B. Ich kann gut schreiben, habe Erfahrung mit Social Media...' },
+  { id:'learn', step:'Deine Bereitschaft', question:'Was bist du bereit zu lernen?', hint:'Nicht alles muss man selbst können.', type:'text', placeholder:'Z.B. Ich bin bereit Canva zu lernen aber keine Programmierung...' },
+  { id:'time', step:'Dein Rahmen', question:'Wie viel Zeit hast du pro Woche realistisch?', type:'single', options:['2 bis 5 Stunden','5 bis 10 Stunden','10 bis 20 Stunden','Mehr als 20 Stunden'] },
+  { id:'budget', step:'Dein Rahmen', question:'Was ist dein Startbudget?', type:'single', options:['Kein Budget, nur Zeit','Bis 200 Euro','Bis 500 Euro','Bis 1.000 Euro','Budget ist kein Hindernis'] },
+  { id:'goal30', step:'Dein Ziel', question:'Was soll am Ende der 30 Tage stehen?', type:'single', options:['Erste zahlende Kunden gewinnen','Ein fertiges Angebot das ich verkaufen kann','Erste Sichtbarkeit aufgebaut haben','Den ersten Umsatz generiert haben','Einfach angefangen haben und wissen ob es funktioniert'] }
+];
+
+let questions = [];
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function selectPath(p) {
+  path = p;
+  questions = p === 'pdf' ? pdfQuestions : ownQuestions;
+  current = 0;
+  answers = {};
+  showScreen('quiz');
+  renderQuestion();
+}
+
+function handleFileUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    pdfContent = e.target.result;
+    answers['pdf_upload'] = file.name;
+    document.querySelector('.upload-area').classList.add('uploaded');
+    document.querySelector('.upload-text').innerHTML = `<strong>✓ ${file.name}</strong><br>Datei erfolgreich geladen`;
+    updateNextBtn();
+  };
+  reader.readAsText(file);
+}
+
+function renderQuestion() {
+  // Skip conditional questions if not relevant
+  let q = questions[current];
+  while (q && q.conditionalOn) {
+    const formatAnswers = answers[q.conditionalOn] || [];
+    const formatArr = Array.isArray(formatAnswers) ? formatAnswers : [formatAnswers];
+    if (!formatArr.includes(q.conditionalValue)) {
+      answers[q.id] = 'Nicht relevant';
+      current++;
+      if (current >= questions.length) { showScreen('payment'); return; }
+      q = questions[current];
+    } else { break; }
+  }
+  if (!q) { showScreen('payment'); return; }
+
+  const total = questions.filter(q => !q.conditional || (answers['format'] || []).includes('App oder Tool') || q.id !== 'app_type').length;
+  const displayNum = questions.slice(0, current + 1).filter(q => !q.conditional || q.id !== 'app_type' || (answers['format'] || []).includes('App oder Tool')).length;
+
+  document.getElementById('quiz-count').textContent = displayNum + ' / ' + (path === 'pdf' ? 8 : 9);
+  document.getElementById('progress-bar').style.width = ((current / questions.length) * 100) + '%';
+  document.getElementById('step-label').textContent = q.step || '';
+  document.getElementById('question-text').textContent = q.question;
+  document.getElementById('question-hint').textContent = q.hint || '';
+  document.getElementById('question-hint').style.display = q.hint ? 'block' : 'none';
+  document.getElementById('error-msg').style.display = 'none';
+  document.getElementById('btn-back').style.display = current > 0 ? 'block' : 'none';
+  document.getElementById('btn-next').textContent = current === questions.length - 1 ? 'Plan erstellen →' : 'Weiter →';
+
+  const inputEl = document.getElementById('question-input');
+
+  if (q.type === 'upload') {
+    inputEl.innerHTML = `
+      <div class="upload-area ${answers[q.id] ? 'uploaded' : ''}" onclick="document.getElementById('pdf-input').click()">
+        <div class="upload-icon">📄</div>
+        <div class="upload-text">${answers[q.id] ? `<strong>✓ ${answers[q.id]}</strong><br>Datei erfolgreich geladen` : '<strong>PDF hochladen</strong><br>Klicke hier um dein Business Kompass Ergebnis hochzuladen<br><span style="font-size:12px; opacity:0.5">Du kannst auch eine .txt Datei hochladen</span>'}</div>
+      </div>`;
+  } else if (q.type === 'text') {
+    inputEl.innerHTML = `<textarea rows="4" placeholder="${q.placeholder || ''}" oninput="handleText(this.value)">${answers[q.id] || ''}</textarea>`;
+  } else if (q.type === 'single') {
+    inputEl.innerHTML = '<div class="options">' + q.options.map(opt => {
+      const sel = answers[q.id] === opt;
+      return `<button class="option-btn${sel ? ' selected' : ''}" onclick="selectSingle('${opt.replace(/'/g, "\\'")}')">${opt}</button>`;
+    }).join('') + '</div>';
+  } else if (q.type === 'multi') {
+    inputEl.innerHTML = '<div class="options"><div class="multi-hint">Mehrfachauswahl möglich</div>' + q.options.map(opt => {
+      const sel = (answers[q.id] || []).includes(opt);
+      return `<button class="option-btn${sel ? ' selected' : ''}" onclick="selectMulti('${opt.replace(/'/g, "\\'")}')">${opt}</button>`;
+    }).join('') + '</div>';
+  }
+
+  updateNextBtn();
+}
+
+function selectSingle(val) { answers[questions[current].id] = val; renderQuestion(); }
+function selectMulti(val) {
+  const id = questions[current].id;
+  const cur = answers[id] || [];
+  answers[id] = cur.includes(val) ? cur.filter(v => v !== val) : [...cur, val];
+  renderQuestion();
+}
+function handleText(val) { answers[questions[current].id] = val; updateNextBtn(); }
+
+function canProceed() {
+  const q = questions[current];
+  if (q.type === 'upload') return !!answers[q.id];
+  if (q.type === 'text') { const a = answers[q.id]; return a && a.trim().length > 2; }
+  if (q.type === 'multi') { const a = answers[q.id]; return a && a.length > 0; }
+  return !!answers[q.id];
+}
+
+function updateNextBtn() { document.getElementById('btn-next').disabled = !canProceed(); }
+
+function nextQuestion() {
+  if (!canProceed()) return;
+  if (current < questions.length - 1) { current++; renderQuestion(); }
+  else { showScreen('payment'); }
+}
+
+function prevQuestion() {
+  if (current > 0) { current--; renderQuestion(); }
+}
+
+function buildPrompt() {
+  const qa = questions.map(q => {
+    const a = answers[q.id];
+    let val = !a ? '(keine Antwort)' : Array.isArray(a) ? a.join(', ') : a;
+    return `${q.question}\nAntwort: ${val}`;
+  }).join('\n\n');
+
+  const pdfContext = pdfContent ? `\n\nBusiness Kompass Testergebnis (hochgeladenes Dokument):\n${pdfContent.substring(0, 2000)}` : '';
+
+  return `Du bist ein erfahrener Business-Stratege. Jemand möchte ein Business aufbauen und hat dir alle relevanten Informationen gegeben. Erstelle einen konkreten, personalisierten 30-Tage Starterplan.
+
+WICHTIG: Sei konkret, direkt und realistisch. Keine Motivationsfloskeln. Echte Aufgaben die diese Person heute noch anfangen kann.
+Schreibe warm und direkt wie ein guter Mentor. Keine Bindestriche als Aufzählungszeichen. Fließende Sätze.
+Berücksichtige die Fähigkeiten der Person und weise explizit darauf hin welche Fähigkeiten sie noch brauchen und ob sie diese lernen oder jemanden einstellen sollten.
+${pdfContext}
+
+Antworten der Person:
+${qa}
+
+Antworte NUR mit diesem JSON-Objekt, kein Text davor oder danach. Keine rohen Zeilenumbrüche in Textwerten:
+
+{
+  "ausgangslage": "2-3 Sätze die zeigen dass du die Person und ihre Idee wirklich verstanden hast. Direkt und persönlich.",
+  "wochen": [
+    {
+      "nummer": 1,
+      "titel": "Titel der Woche",
+      "fokus": "Was diese Woche erreicht werden soll in einem Satz",
+      "aufgaben": [
+        {
+          "tag": "Mo/Di",
+          "titel": "Konkrete Aufgabe",
+          "beschreibung": "Was genau zu tun ist. So konkret dass die Person heute damit anfangen kann."
+        }
+      ]
+    }
+  ],
+  "faehigkeiten": [
+    {
+      "name": "Name der Fähigkeit oder des Tools",
+      "status": "lernen",
+      "hinweis": "Warum diese Fähigkeit wichtig ist und wie man sie am schnellsten lernt"
+    },
+    {
+      "name": "Name der Fähigkeit",
+      "status": "einstellen",
+      "hinweis": "Warum man das outsourcen sollte und wo man jemanden findet"
+    }
+  ],
+  "ziel_tag_30": "Was realistisch am Tag 30 erreicht sein kann wenn die Person den Plan umsetzt.",
+  "motivation": "Ein ehrlicher, persönlicher Abschlusssatz der wirklich trifft. Kein Coaching-Gerede. Zeige dass du ihre Antworten wirklich gelesen hast."
+}`;
+}
+
+async function generatePlan() {
+  showScreen('loading');
+  let msgIdx = 0;
+  const msgInterval = setInterval(() => {
+    msgIdx = Math.min(msgIdx + 1, loadingMessages.length - 1);
+    document.getElementById('loading-text').textContent = loadingMessages[msgIdx];
+  }, 2500);
+
+  try {
+    const response = await fetch('https://business-kompass-s7s4.onrender.com/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt: buildPrompt() })
+    });
+    const data = await response.json();
+    clearInterval(msgInterval);
+    if (!data.result) throw new Error('Kein Ergebnis');
+
+    let clean = data.result.replace(/```json|```/g, '').trim();
+    const firstBrace = clean.indexOf('{');
+    const lastBrace = clean.lastIndexOf('}');
+    if (firstBrace !== -1 && lastBrace !== -1) clean = clean.substring(firstBrace, lastBrace + 1);
+
+    resultData = JSON.parse(clean);
+    renderResult();
+    showScreen('result');
+  } catch(err) {
+    clearInterval(msgInterval);
+    console.error(err);
+    showScreen('payment');
+    alert('Etwas ist schiefgelaufen. Bitte versuche es nochmal.');
+  }
+}
+
+function renderResult() {
+  document.getElementById('result-intro').textContent = resultData.ausgangslage || '';
+  document.getElementById('result-motivation').textContent = resultData.motivation || '';
+
+  // Weeks
+  const weeksEl = document.getElementById('result-weeks');
+  weeksEl.innerHTML = (resultData.wochen || []).map(w => `
+    <div class="week-card">
+      <div class="week-header">
+        <span class="week-num">WOCHE ${w.nummer}</span>
+        <div>
+          <div class="week-title">${w.titel}</div>
+          <div class="week-focus">${w.fokus}</div>
+        </div>
+      </div>
+      <div class="week-body">
+        ${(w.aufgaben || []).map(a => `
+          <div class="task-item">
+            <div class="task-day">${a.tag}</div>
+            <div class="task-content">
+              <div class="task-title">${a.titel}</div>
+              <div class="task-desc">${a.beschreibung}</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  // Skills
+  if (resultData.faehigkeiten && resultData.faehigkeiten.length > 0) {
+    document.getElementById('result-skills').style.display = 'block';
+    document.getElementById('skills-list').innerHTML = resultData.faehigkeiten.map(s => `
+      <div class="skill-item">
+        <span class="skill-status ${s.status === 'lernen' ? 'learn' : 'hire'}">${s.status === 'lernen' ? 'LERNEN' : 'EINSTELLEN'}</span>
+        <div class="skill-text"><strong style="color:var(--cream)">${s.name}</strong><br>${s.hinweis}</div>
+      </div>
+    `).join('');
+  }
+
+  // Legal section - always shown
+  document.getElementById('result-legal').style.display = 'block';
+}
+
+function toggleLegal(id) {
+  const body = document.getElementById(id);
+  const btn = body.previousElementSibling.querySelector('.legal-header-toggle');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  btn.textContent = isOpen ? '+' : '−';
+}
+</script>
+
+</body>
+</html>
