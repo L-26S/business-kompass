@@ -2,10 +2,10 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="apple-touch-icon" href="favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dein Business Kompass 5 Ideen die wirklich zu dir passen</title>
+<title>Business Kompass – Logic | Soul</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -14,7 +14,6 @@
     --beige: #e8d9c4;
     --brown-deep: #2c1f14;
     --brown-mid: #4a3323;
-    --brown-light: #7a5c44;
     --terra: #c4622d;
     --terra-light: #d4784a;
     --text: #1e1208;
@@ -22,9 +21,7 @@
     --text-light: #7a6655;
     --border: rgba(44,31,20,0.12);
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     background: var(--cream);
     color: var(--text);
@@ -33,510 +30,352 @@
     overflow-x: hidden;
   }
 
-  /* Subtle texture */
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-  }
-
   /* NAV */
   nav {
     padding: 24px 56px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; justify-content: space-between; align-items: center;
     border-bottom: 1px solid var(--border);
-    position: relative;
-    z-index: 10;
     background: var(--cream);
+    position: sticky; top: 0; z-index: 100;
   }
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 16px;
-    letter-spacing: 0.1em;
-    color: var(--brown-deep);
-    font-weight: 400;
-  }
-  .nav-tag {
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    color: var(--text-light);
-    text-transform: uppercase;
-  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--brown-deep); text-decoration: none; }
+  .nav-tag { font-size: 11px; letter-spacing: 0.22em; color: var(--text-light); text-transform: uppercase; }
 
   /* HERO */
   .hero {
+    max-width: 900px; margin: 0 auto;
+    padding: 80px 56px 72px;
     position: relative;
-    z-index: 1;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 88px 56px 80px;
   }
-
   .hero-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    color: var(--terra);
-    text-transform: uppercase;
-    margin-bottom: 32px;
-    font-weight: 400;
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 11px; letter-spacing: 0.25em; color: var(--terra);
+    text-transform: uppercase; margin-bottom: 28px; font-weight: 400;
   }
   .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--terra); display: inline-block; }
-
-  h1.hero-title {
+  h1 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(32px, 5vw, 58px);
-    font-weight: 400;
-    line-height: 1.08;
-    color: var(--brown-deep);
-    margin-bottom: 28px;
-    letter-spacing: -0.02em;
+    font-weight: 400; line-height: 1.2;
+    color: var(--brown-deep); margin-bottom: 24px;
+    letter-spacing: -0.02em; text-align: center;
   }
-  h1.hero-title em {
-    font-style: italic;
-    color: var(--terra);
-  }
-
+  h1 em { font-style: italic; color: var(--terra); }
   .hero-sub {
-    font-size: 18px;
-    color: var(--text-mid);
-    line-height: 1.7;
-    max-width: 500px;
-    margin-bottom: 44px;
-    font-weight: 300;
+    font-size: clamp(14px, 4vw, 17px); color: var(--text-mid);
+    line-height: 1.7; max-width: 520px; margin-bottom: 16px; text-align: center; margin-left: auto; margin-right: auto;
   }
-
-  .hero-cta-wrap {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    flex-wrap: wrap;
-  }
-
-  .cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--brown-deep);
-    color: var(--cream);
-    padding: 18px 44px;
-    font-family: 'Jost', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    transition: all 0.25s;
-    text-transform: uppercase;
-  }
-  .cta-btn:hover {
-    background: var(--terra);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(196,98,45,0.25);
-  }
-
-  .cta-price-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .cta-price-amount {
+  .hero-philosophy {
     font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    color: var(--brown-deep);
-    font-weight: 400;
-  }
-  .cta-price-note {
-    font-size: 12px;
-    color: var(--text-light);
-    letter-spacing: 0.08em;
+    font-size: 16px; font-style: italic;
+    color: var(--text-light); max-width: 480px; margin-bottom: 48px;
+    line-height: 1.6; text-align: center; margin-left: auto; margin-right: auto;
   }
 
-  /* STRIP */
-  .strip {
-    background: var(--brown-deep);
-    color: var(--cream);
-    padding: 20px 56px;
-    display: flex;
-    justify-content: center;
-    gap: 56px;
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 1;
-  }
-  .strip-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 12px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    opacity: 0.8;
-  }
-  .strip-item::before {
-    content: '✦';
-    color: var(--terra-light);
-    font-size: 10px;
+  /* PRODUCTS */
+  .products {
+    max-width: 900px; margin: 0 auto;
+    padding: 0 56px 80px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px;
   }
 
-  /* SECTION */
-  .section {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 88px 56px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .section-eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    color: var(--terra);
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    font-weight: 400;
-  }
-
-  h2.section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(30px, 5vw, 58px);
-    font-weight: 400;
-    color: var(--brown-deep);
-    line-height: 1.2;
-    margin-bottom: 44px;
-  }
-  h2.section-title em { font-style: italic; color: var(--terra); }
-
-  /* FEATURES */
-  .features {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--border);
+  .product-card {
     border: 1px solid var(--border);
+    overflow: hidden; position: relative;
+    display: flex; flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-  .feature {
-    background: var(--cream);
-    padding: 40px 36px;
-  }
-  .feature:nth-child(odd) { background: var(--cream2); }
-  .feature-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 52px;
-    font-weight: 400;
-    color: var(--beige);
-    line-height: 1;
-    margin-bottom: 18px;
-  }
-  .feature-title {
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--brown-deep);
-    margin-bottom: 10px;
-    letter-spacing: 0.02em;
-  }
-  .feature-text {
-    font-size: 14px;
-    color: var(--text-mid);
-    line-height: 1.7;
-  }
+  .product-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(44,31,20,0.1); }
 
-  /* DIVIDER ORNAMENT */
-  .ornament {
-    text-align: center;
-    padding: 16px;
-    color: var(--terra);
-    font-size: 18px;
-    opacity: 0.5;
+  .product-card.featured { border-color: var(--terra); }
+
+  .product-header {
+    padding: 28px 28px 20px;
+    background: var(--brown-deep);
     position: relative;
-    z-index: 1;
+  }
+  .product-header.light { background: var(--cream2); }
+
+  .product-badge {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 12px; display: inline-block;
+  }
+  .product-badge.dark { color: var(--terra-light); }
+  .product-badge.light-badge { color: var(--terra); }
+
+  .product-step {
+    position: absolute; top: 16px; right: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 40px; color: rgba(255,255,255,0.06);
+    font-weight: 400; line-height: 1;
+  }
+  .product-step.light-step { color: rgba(44,31,20,0.06); }
+
+  .product-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 400; line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .product-title.dark { color: var(--cream); }
+  .product-title.light-title { color: var(--brown-deep); }
+
+  .product-tagline { font-size: 13px; line-height: 1.5; }
+  .product-tagline.dark { color: rgba(242,232,217,0.55); }
+  .product-tagline.light-tagline { color: var(--text-light); }
+
+  .product-body {
+    padding: 24px 28px; flex: 1;
+    display: flex; flex-direction: column; gap: 16px;
+    background: white;
   }
 
-  /* STEPS */
+  .product-features { display: flex; flex-direction: column; gap: 8px; }
+  .product-feature {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 13px; color: var(--text-mid); line-height: 1.5;
+  }
+  .product-feature::before { content: '✦'; color: var(--terra); font-size: 9px; padding-top: 3px; flex-shrink: 0; }
+
+  .product-footer {
+    padding: 20px 28px;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    background: white; gap: 12px;
+  }
+
+  .product-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; color: var(--brown-deep); font-weight: 400;
+  }
+  .product-price-note { font-size: 11px; color: var(--text-light); letter-spacing: 0.08em; margin-top: 2px; }
+
+  .btn-product {
+    background: var(--brown-deep); color: var(--cream);
+    border: none; padding: 12px 24px;
+    font-size: 13px; font-weight: 500;
+    cursor: pointer; letter-spacing: 0.08em;
+    text-transform: uppercase; font-family: 'Jost', sans-serif;
+    text-decoration: none; display: inline-block;
+    transition: background 0.2s; white-space: nowrap;
+  }
+  .btn-product:hover { background: var(--terra); }
+  .btn-product.terra { background: var(--terra); }
+  .btn-product.terra:hover { background: var(--terra-light); }
+
+  /* PHILOSOPHY */
+  .philosophy {
+    background: var(--cream2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .philosophy-inner {
+    max-width: 900px; margin: 0 auto;
+    padding: 40px 56px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .philosophy-star { color: var(--terra); font-size: 20px; flex-shrink: 0; }
+  .philosophy-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; color: var(--brown-deep);
+    line-height: 1.6; font-style: italic;
+  }
+  .philosophy-source {
+    font-size: 12px; letter-spacing: 0.15em; color: var(--terra);
+    text-transform: uppercase; margin-top: 8px; font-style: normal;
+    font-family: 'Jost', sans-serif;
+  }
+
+  /* HOW IT WORKS */
+  .how-section {
+    max-width: 900px; margin: 0 auto;
+    padding: 72px 56px;
+  }
+  .section-eyebrow {
+    font-size: 11px; letter-spacing: 0.25em; color: var(--terra);
+    text-transform: uppercase; margin-bottom: 16px;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 400; color: var(--brown-deep);
+    line-height: 1.2; margin-bottom: 48px;
+  }
+  h2 em { font-style: italic; color: var(--terra); }
+
   .steps { display: flex; flex-direction: column; }
   .step {
-    display: grid;
-    grid-template-columns: 48px 1fr;
-    gap: 28px;
-    padding: 36px 0;
+    display: grid; grid-template-columns: 48px 1fr;
+    gap: 24px; padding: 28px 0;
     border-bottom: 1px solid var(--border);
     align-items: start;
   }
   .step:last-child { border-bottom: none; }
-  .step-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 13px;
-    color: var(--terra);
-    letter-spacing: 0.1em;
-    padding-top: 3px;
-  }
-  .step-title {
-    font-size: 18px;
-    font-weight: 400;
-    color: var(--brown-deep);
-    margin-bottom: 8px;
-    font-family: 'Playfair Display', serif;
-  }
-  .step-text {
-    font-size: 14px;
-    color: var(--text-mid);
-    line-height: 1.7;
-  }
-
-  /* DARK SECTION */
-  .dark-section {
-    background: var(--brown-deep);
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-  }
-  .dark-section::before {
-    content: '';
-    position: absolute;
-    top: -100px; right: -100px;
-    width: 400px; height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(196,98,45,0.15) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .dark-section .section {
-    color: var(--cream);
-  }
-  .dark-section .section-eyebrow { color: var(--terra-light); }
-  .dark-section h2.section-title { color: var(--cream); }
-  .dark-section .step-title { color: var(--cream); }
-  .dark-section .step-text { color: rgba(242,232,217,0.6); }
-  .dark-section .step { border-color: rgba(255,255,255,0.08); }
-
-  /* BOTTOM CTA */
-  .bottom-cta {
-    background: var(--cream2);
-    border-top: 1px solid var(--border);
-    text-align: center;
-    padding: 96px 56px;
-    position: relative;
-    z-index: 1;
-  }
-  .bottom-cta h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 5vw, 60px);
-    font-weight: 400;
-    color: var(--brown-deep);
-    line-height: 1.15;
-    margin-bottom: 20px;
-  }
-  .bottom-cta h2 em { font-style: italic; color: var(--terra); }
-  .bottom-cta p {
-    font-size: 17px;
-    color: var(--text-mid);
-    max-width: 440px;
-    margin: 0 auto 48px;
-    line-height: 1.6;
-  }
-  .bottom-cta .hero-cta-wrap { justify-content: center; }
-  .small-note {
-    font-size: 11px;
-    color: var(--text-light);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-top: 24px;
-  }
+  .step-num { font-size: 12px; color: var(--terra); letter-spacing: 0.1em; padding-top: 3px; font-weight: 500; }
+  .step-title { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--brown-deep); margin-bottom: 6px; }
+  .step-text { font-size: 14px; color: var(--text-mid); line-height: 1.7; }
 
   /* FOOTER */
   footer {
-    background: var(--brown-deep);
-    padding: 28px 56px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    z-index: 1;
+    background: var(--brown-deep); padding: 28px 56px;
+    display: flex; justify-content: space-between; align-items: center;
   }
-  footer span {
-    font-size: 12px;
-    color: rgba(242,232,217,0.35);
-    letter-spacing: 0.1em;
-  }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .fade-up { opacity: 0; animation: fadeUp 0.7s ease forwards; }
-  .d1 { animation-delay: 0.1s; }
-  .d2 { animation-delay: 0.25s; }
-  .d3 { animation-delay: 0.4s; }
-  .d4 { animation-delay: 0.55s; }
+  footer span { font-size: 12px; color: rgba(242,232,217,0.35); letter-spacing: 0.1em; }
+  footer a { font-size: 12px; color: rgba(242,232,217,0.35); text-decoration: none; letter-spacing: 0.1em; }
+  footer a:hover { color: rgba(242,232,217,0.7); }
 
   @media (max-width: 640px) {
-    nav, .hero, .section, .strip, .bottom-cta, footer { padding-left: 24px; padding-right: 24px; }
-    .hero { padding-top: 56px; }
-    .features { grid-template-columns: 1fr; }
-    .strip { gap: 20px; }
-    h1.hero-title { font-size: 38px; }
-    .bottom-cta h2 { font-size: 32px; }
+    nav, .hero, .products, .philosophy-inner, .how-section, footer { padding-left: 24px; padding-right: 24px; }
+    .products { grid-template-columns: 1fr; }
+    h1 { font-size: 32px; }
   }
 </style>
 </head>
 <body>
 
-<nav style="justify-content:center;">
-  <div class="nav-logo">Dein Business Kompass</div>
+<nav>
+  <a href="index.html" class="nav-logo">Logic | Soul</a>
+  <span class="nav-tag">Business Kompass</span>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow fade-up" style="justify-content:center;">
+  <div class="hero-eyebrow">
     <span class="dot"></span>
     Persönlichkeitsbasierte Businessfindung
     <span class="dot"></span>
   </div>
-
-  <h1 class="hero-title fade-up d1" style="text-align:center;">
-    Manche scheitern nicht an Motivation.<br>
-    Sondern an Ideen,<br>
-    <em>die nie wirklich<br>zu ihnen gepasst haben.</em>
+  <h1>
+    Finde das Business<br>
+    das wirklich<br>
+    <em>zu dir gehört.</em>
   </h1>
-
-  <p class="hero-sub fade-up d2" style="text-align:center; margin-left:auto; margin-right:auto;">
-    Vielleicht brauchst du keine neue Idee. Sondern endlich eine, die sich wirklich nach <em>dir</em> anfühlt.<br><br>25 Fragen. 5 Ideen. Ausschließlich aus deiner Persönlichkeit.
+  <p class="hero-sub">
+    Nicht was gerade trendet. Nicht was andere von dir erwarten. Sondern das was aus deiner Persönlichkeit, deinen Stärken und deiner Geschichte entsteht.
   </p>
-
-  <div class="hero-cta-wrap fade-up d3" style="justify-content:center; flex-direction:column; align-items:center;" style="flex-direction:column; align-items:flex-start; gap:10px;">
-    <p style="font-size:13px; color:var(--terra); letter-spacing:0.12em; text-transform:uppercase; font-family:'Jost',sans-serif;">Für nur 27 Euro. Einmalig. Kein Abo.</p>
-    <a href="https://www.checkout-ds24.com/product/696475" class="cta-btn">
-      Jetzt starten →
-    </a>
-    <span style="font-size:12px; color:var(--text-light); letter-spacing:0.08em;">Sofortiger Zugang nach dem Kauf</span>
-  </div>
+  <p class="hero-philosophy">
+    Eine gute Business-Idee ist nur dann nachhaltig, wenn du dich selbst darin wiederfindest.
+  </p>
 </section>
 
-<!-- STRIP -->
-<div class="strip">
-  <div class="strip-item">25 gezielte Fragen</div>
-  <div class="strip-item">5 persönlichkeitsbasierte Ideen</div>
-  <div class="strip-item">Konkreter erster Schritt</div>
-  <div class="strip-item">Ehrliche Antworten, echte Ergebnisse</div>
-</div>
+<!-- PRODUCTS -->
+<div class="products">
 
-
-<!-- MINI PHILOSOPHY UNDER STRIP -->
-<div style="background: #f5ede0; border-bottom: 1px solid rgba(44,31,20,0.1); position: relative; z-index: 1;">
-  <div style="max-width: 900px; margin: 0 auto; padding: 36px 56px; display: flex; align-items: center; gap: 20px;">
-    <div style="color: #c4622d; font-size: 20px; flex-shrink: 0;">✦</div>
-    <p style="font-family: 'Playfair Display', serif; font-size: 18px; color: #2c1f14; line-height: 1.6; font-style: italic; margin: 0;">
-      „Eine gute Business-Idee ist nur dann nachhaltig, wenn sie Sinn ergibt und sie ergibt Sinn, wenn du dich selbst darin wiederfindest."
-      <span style="display: block; font-family: 'Jost', sans-serif; font-size: 12px; color: #7a6655; font-style: normal; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 10px;"> Logic | Soul</span>
-    </p>
-  </div>
-</div>
-
-<!-- WHAT YOU GET -->
-<section class="section">
-  <div class="section-eyebrow">Was du bekommst</div>
-  <h2 class="section-title">Kein Generator.<br><em>Ein Spiegel.</em></h2>
-
-  <div class="features">
-    <div class="feature">
-      <div class="feature-num">01</div>
-      <div class="feature-title">25 gezielte Fragen</div>
-      <div class="feature-text">Keine oberflächlichen Interessenabfragen. 25 Fragen die deine echte Energie, deine verborgenen Stärken und deine Geschichte erschließen.</div>
+  <!-- Product 1: Test -->
+  <div class="product-card">
+    <div class="product-header">
+      <div class="product-step">01</div>
+      <div class="product-badge dark">Schritt 1</div>
+      <h3 class="product-title dark">Dein Business Kompass</h3>
+      <p class="product-tagline dark">25 Fragen. 5 Ideen. Nur aus deiner Persönlichkeit.</p>
     </div>
-    <div class="feature">
-      <div class="feature-num">02</div>
-      <div class="feature-title">5 maßgeschneiderte Ideen</div>
-      <div class="feature-text">Jede Idee mit einer Begründung warum sie zu genau dir passt, direkt auf deine eigenen Worte bezogen. Nichts das für jeden passen könnte.</div>
+    <div class="product-body">
+      <div class="product-features">
+        <div class="product-feature">25 gezielte Fragen zu deiner Persönlichkeit und Lebenssituation</div>
+        <div class="product-feature">5 maßgeschneiderte Business-Ideen mit Begründung warum genau sie zu dir passen</div>
+        <div class="product-feature">Konkreter erster Schritt pro Idee</div>
+        <div class="product-feature">Speicherbar als PDF</div>
+      </div>
+      <p style="font-size:13px; color:var(--text-light); font-style:italic; line-height:1.6;">
+        Nimm dir Zeit für ehrliche Antworten. Je mehr du von dir zeigst, desto persönlicher das Ergebnis.
+      </p>
     </div>
-    <div class="feature">
-      <div class="feature-num">03</div>
-      <div class="feature-title">Konkreter erster Schritt</div>
-      <div class="feature-text">Pro Idee ein einziger nächster Schritt, so konkret dass du ihn heute noch tun könntest. Nicht fünf Tipps. Einer. Weil einer anfängt.</div>
-    </div>
-    <div class="feature">
-      <div class="feature-num">04</div>
-      <div class="feature-title">Ehrlicher Abschluss</div>
-      <div class="feature-text">Kein Motivationscoaching. Ein Abschluss der wirklich trifft, weil er zeigt dass jemand deine Antworten wirklich gelesen hat.</div>
+    <div class="product-footer">
+      <div>
+        <div class="product-price">27 €</div>
+        <div class="product-price-note">Einmalig · Kein Abo</div>
+      </div>
+      <a href="https://www.checkout-ds24.com/product/696475" class="btn-product">Jetzt starten →</a>
     </div>
   </div>
-</section>
 
-<div class="ornament">✦ ✦ ✦</div>
-
-<!-- HOW IT WORKS dark -->
-<div class="dark-section">
-  <section class="section">
-    <div class="section-eyebrow">So funktioniert es</div>
-    <h2 class="section-title">Drei Schritte.<br><em>Fünf Ideen.</em></h2>
-
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <div>
-          <div class="step-title">Bezahle einmalig 27 €</div>
-          <div class="step-text">Sicherer Kauf über Digistore24. Du bekommst sofort Zugang zum Fragebogen, kein Warten, kein Umweg.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <div>
-          <div class="step-title">Beantworte 25 Fragen ehrlich</div>
-          <div class="step-text">Dauert etwa 5 Minuten. Je ehrlicher du antwortest, desto mehr wirst du dich in den Ideen wiederfinden. Jede Antwort fließt in die Analyse ein.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <div>
-          <div class="step-title">Erhalte deine 5 persönlichen Ideen</div>
-          <div class="step-text">Sofort. Mit einer Begründung warum genau diese Idee zu dir passt, einem konkreten ersten Schritt und einem realistischen Zeitrahmen.</div>
-        </div>
-      </div>
+  <!-- Product 2: Vertiefung -->
+  <div class="product-card featured">
+    <div class="product-header light">
+      <div class="product-step light-step">02</div>
+      <div class="product-badge light-badge">Schritt 2</div>
+      <h3 class="product-title light-title">Dein 30-Tage Businessplan</h3>
+      <p class="product-tagline light-tagline">Du weißt was du willst. Jetzt bekommst du den Plan dazu.</p>
     </div>
-  </section>
+    <div class="product-body">
+      <div class="product-features">
+        <div class="product-feature">Personalisierter 30-Tage Starterplan basierend auf deiner Idee</div>
+        <div class="product-feature">Fähigkeiten-Analyse: Was du lernst, wen du ins Boot holst</div>
+        <div class="product-feature">Konkrete Aufgaben pro Woche die heute noch umsetzbar sind</div>
+        <div class="product-feature">Rechtliche Hinweise für deinen Start in Deutschland</div>
+        <div class="product-feature">Funktioniert mit oder ohne Business Kompass Test</div>
+      </div>
+      <p style="font-size:13px; color:var(--text-light); font-style:italic; line-height:1.6;">
+        Hast du den Test bereits gemacht? Lade dein PDF hoch und baue direkt darauf auf.
+      </p>
+    </div>
+    <div class="product-footer">
+      <div>
+        <div class="product-price">47 €</div>
+        <div class="product-price-note">Einmalig · Kein Abo</div>
+      </div>
+      <a href="vertiefung.html" class="btn-product terra">Zum Plan →</a>
+    </div>
+  </div>
+
 </div>
 
+<!-- SKIP TEST HINT -->
+<div style="max-width:900px; margin:0 auto; padding:0 56px 48px; text-align:center;">
+  <p style="font-size:14px; color:var(--text-light); line-height:1.7;">
+    Du weißt bereits was du aufbauen willst und brauchst keinen Test?<br>
+    <a href="vertiefung.html" style="color:var(--terra); text-decoration:none; font-weight:500;">Dann starte direkt mit deinem 30-Tage Plan →</a>
+  </p>
+</div>
 
 <!-- PHILOSOPHY -->
-<section class="section" style="padding-top: 0;">
-  <div style="background: #f5ede0; border-left: 3px solid #c4622d; padding: 40px 44px; position: relative;">
-    <div class="section-eyebrow" style="margin-bottom: 14px;">Unsere Überzeugung</div>
-    <p style="font-family: 'Playfair Display', serif; font-size: clamp(18px, 2.5vw, 24px); color: #2c1f14; line-height: 1.6; font-weight: 400; margin-bottom: 16px;">
-      Eine gute Business-Idee ist nur dann nachhaltig,<br>wenn sie <em style="color: #c4622d;">Sinn ergibt.</em>
-    </p>
-    <p style="font-size: 16px; color: #4a3323; line-height: 1.7; font-family: 'Jost', sans-serif; font-weight: 300; max-width: 540px;">
-      Und sie ergibt Sinn wenn du dich selbst darin wiederfindest. Nicht in einer Idee die gerade trendet. Nicht in dem was andere von dir erwarten. Sondern in etwas das wirklich zu dir gehört.
-    </p>
-    <p style="font-size: 13px; color: #7a6655; margin-top: 20px; letter-spacing: 0.1em; font-family: 'Jost', sans-serif;"> Logic | Soul</p>
+<div class="philosophy">
+  <div class="philosophy-inner">
+    <div class="philosophy-star">✦</div>
+    <div>
+      <p class="philosophy-text">
+        Eine gute Business-Idee ist nur dann nachhaltig, wenn sie Sinn ergibt. Und sie ergibt Sinn wenn du dich selbst darin wiederfindest.
+      </p>
+      <p class="philosophy-source">— Logic | Soul</p>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="section-eyebrow">So funktioniert es</div>
+  <h2>Zwei Schritte zu deinem<br><em>eigenen Business.</em></h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div>
+        <div class="step-title">Finde deine Idee</div>
+        <div class="step-text">Beantworte 25 Fragen zu deiner Persönlichkeit, deinen Stärken und deiner Lebenssituation. Nimm dir die Zeit die du brauchst. Das Ergebnis sind 5 Ideen die wirklich aus dir entstehen.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div>
+        <div class="step-title">Setze sie um</div>
+        <div class="step-text">Wähle deine Lieblingsidee und bekomme einen konkreten 30-Tage Plan. Mit Aufgaben die du heute noch anfangen kannst, einer Fähigkeiten-Analyse und allem was du rechtlich wissen musst.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div>
+        <div class="step-title">Starte ohne Umwege</div>
+        <div class="step-text">Keine generischen Ratschläge, kein Hustle-Content. Nur dein Weg, deine Stärken, dein Plan. So konkret dass du am ersten Tag weißt was zu tun ist.</div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- BOTTOM CTA -->
-<div class="bottom-cta">
-  <div class="section-eyebrow" style="margin-bottom:20px;">Bereit?</div>
-  <h2>Finde heraus welches<br>Business <em>zu dir gehört.</em></h2>
-  <p>5 Minuten. 27 €. Eine Richtung die sich richtig anfühlt.</p>
-  <div class="hero-cta-wrap" style="justify-content:center; flex-direction:column; align-items:center; gap:10px;">
-    <p style="font-size:13px; color:var(--terra); letter-spacing:0.12em; text-transform:uppercase; font-family:'Jost',sans-serif;">Für nur 27 Euro. Einmalig. Kein Abo.</p>
-    <a href="https://www.checkout-ds24.com/product/696475" class="cta-btn">
-      Jetzt starten →
-    </a>
-  </div>
-  <p class="small-note">Einmaliger Kauf · Kein Abo · Sofortiger Zugang</p>
-</div>
-
 <footer>
-  <a href="https://kompass.logic-soul.com" style="font-size:12px; color:rgba(242,232,217,0.35); text-decoration:none; letter-spacing:0.1em;">© Logic | Soul</a>
+  <span>© Logic | Soul</span>
   <div style="display:flex; gap:24px;">
-    <a href="impressum.html" style="font-size:12px; color:rgba(242,232,217,0.35); text-decoration:none; letter-spacing:0.1em;">Impressum</a>
-    <a href="datenschutz.html" style="font-size:12px; color:rgba(242,232,217,0.35); text-decoration:none; letter-spacing:0.1em;">Datenschutz</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
   </div>
 </footer>
 
