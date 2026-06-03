@@ -357,6 +357,52 @@
     letter-spacing: 0.08em; text-transform: uppercase;
     font-family: 'DM Sans', sans-serif;
   }
+  /* Loading Popup */
+  .popup-overlay {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(44,31,20,0.6);
+    display: flex; justify-content: center; align-items: center;
+    padding: 24px; opacity: 0;
+    animation: fadeInOverlay 0.4s ease 0.3s forwards;
+  }
+  @keyframes fadeInOverlay {
+    to { opacity: 1; }
+  }
+  .popup-card {
+    background: var(--cream); max-width: 440px; width: 100%;
+    padding: 40px 32px; text-align: center;
+    animation: slideUp 0.4s ease 0.3s both;
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .popup-star { color: var(--terra); font-size: 28px; margin-bottom: 16px; }
+  .popup-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: var(--brown-deep);
+    margin-bottom: 10px; font-weight: 400;
+  }
+  .popup-sub {
+    font-size: 14px; color: var(--text-mid);
+    line-height: 1.7; margin-bottom: 24px;
+  }
+  .popup-loading {
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px; font-size: 13px; color: var(--text-light);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .popup-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--terra); animation: dotPulse 1.2s ease-in-out infinite;
+  }
+  .popup-dot:nth-child(2) { animation-delay: 0.2s; }
+  .popup-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes dotPulse {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1); }
+  }
+
   .error-msg {
     color: #c0392b; font-size: 13px;
     padding: 10px 14px; background: rgba(192,57,43,0.08);
@@ -395,7 +441,7 @@
   <p style="font-size:14px; color:var(--text-light); max-width:360px; margin:0 auto 24px; line-height:1.7;">Beantworte jetzt 25 Fragen ehrlich. Je mehr du von dir zeigst, desto mehr wirst du dich in deinen Ergebnissen wiederfinden.</p>
   <p style="font-size:12px; color:var(--text-light); max-width:360px; margin:0 auto 32px; line-height:1.6; opacity:0.7;">Die Abbuchung erfolgt durch Digistore24.</p>
   <button class="btn-primary" onclick="startQuiz()">Los geht es →</button>
-  <p class="intro-note">Dauert etwa 5 Minuten.</p>
+  <p class="intro-note">Nimm dir die Zeit die du brauchst. Ehrliche Antworten machen den Unterschied.</p>
 </div>
 
 <!-- QUIZ -->
@@ -403,7 +449,7 @@
   <div class="quiz-inner">
     <div class="quiz-header">
       <span class="quiz-logo">Dein Business Kompass</span>
-      <span class="quiz-count" id="quiz-count">1 / 20</span>
+      <span class="quiz-count" id="quiz-count">1 / 25</span>
     </div>
     <div class="progress-outer">
       <div class="progress-inner" id="progress-bar" style="width:0%"></div>
@@ -552,7 +598,7 @@ function startQuiz() {
 function renderQuestion() {
   const q = questions[current];
   document.getElementById('quiz-count').textContent = (current + 1) + ' / 25';
-  document.getElementById('progress-bar').style.width = (current / 20 * 100) + '%';
+  document.getElementById('progress-bar').style.width = (current / 25 * 100) + '%';
 
   // Block dots
   const dotsEl = document.getElementById('block-dots');
@@ -699,7 +745,14 @@ Antworte NUR mit dem JSON-Objekt, kein Text davor oder danach. Wichtig: Verwende
 }
 
 async function submitAnswers() {
-  showScreen('loading');
+  // Show popup briefly
+  const popup = document.getElementById('loading-popup');
+  if (popup) {
+    popup.style.display = 'flex';
+    setTimeout(() => { popup.style.display = 'none'; showScreen('loading'); }, 30000);
+  } else {
+    showScreen('loading');
+  }
   let msgIdx = 0;
   const msgInterval = setInterval(() => {
     msgIdx = Math.min(msgIdx + 1, loadingMessages.length - 1);
@@ -810,5 +863,23 @@ function restart() {
     <a href="datenschutz.html" style="font-size:12px; color:rgba(242,232,217,0.35); text-decoration:none; letter-spacing:0.1em;">Datenschutz</a>
   </div>
 </footer>
+<!-- LOADING POPUP -->
+<div id="loading-popup" style="display:none;" class="popup-overlay">
+  <div class="popup-card">
+    <div class="popup-star">✦</div>
+    <h2 class="popup-title">Herzlichen Glückwunsch!</h2>
+    <p class="popup-sub">
+      Du hast deinen Test erfolgreich abgeschlossen.<br>
+      Deine persönlichen Business-Ideen werden gerade entwickelt. Nur für dich, aus deinen Antworten.
+    </p>
+    <div class="popup-loading">
+      <div class="popup-dot"></div>
+      <div class="popup-dot"></div>
+      <div class="popup-dot"></div>
+      <span style="margin-left:4px;">Wird erstellt</span>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
