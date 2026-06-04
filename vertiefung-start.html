@@ -742,11 +742,11 @@ function renderQuestion() {
     if (!formatArr.includes(q.conditionalValue)) {
       answers[q.id] = 'Nicht relevant';
       current++;
-      if (current >= questions.length) { showScreen('payment'); return; }
+      if (current >= questions.length) { generatePlan(); return; }
       q = questions[current];
     } else { break; }
   }
-  if (!q) { showScreen('payment'); return; }
+  if (!q) { generatePlan(); return; }
 
   const total = questions.filter(q => !q.conditional || (answers['format'] || []).includes('App oder Tool') || q.id !== 'app_type').length;
   const displayNum = questions.slice(0, current + 1).filter(q => !q.conditional || q.id !== 'app_type' || (answers['format'] || []).includes('App oder Tool')).length;
@@ -808,7 +808,7 @@ function updateNextBtn() { document.getElementById('btn-next').disabled = !canPr
 function nextQuestion() {
   if (!canProceed()) return;
   if (current < questions.length - 1) { current++; renderQuestion(); }
-  else { showScreen('payment'); }
+  else { generatePlan(); }
 }
 
 function prevQuestion() {
@@ -898,7 +898,7 @@ async function generatePlan() {
   } catch(err) {
     clearInterval(msgInterval);
     console.error(err);
-    showScreen('payment');
+    generatePlan();
     alert('Etwas ist schiefgelaufen. Bitte versuche es nochmal.');
   }
 }
