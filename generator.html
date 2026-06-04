@@ -759,21 +759,25 @@ Antworte NUR mit dem JSON-Objekt, kein Text davor oder danach. Wichtig: Verwende
 }
 
 async function submitAnswers() {
-  // Show popup, then go to loading after 4 seconds
+  let resultReady = false;
+
+  // Show popup for 4 seconds, then loading screen ONLY if result not ready yet
   const popup = document.getElementById('loading-popup');
   if (popup) {
     popup.style.display = 'flex';
-    setTimeout(() => { 
-      popup.style.display = 'none'; 
-      showScreen('loading'); 
+    setTimeout(() => {
+      popup.style.display = 'none';
+      if (!resultReady) showScreen('loading');
     }, 4000);
   } else {
     showScreen('loading');
   }
+
   let msgIdx = 0;
   const msgInterval = setInterval(() => {
     msgIdx = Math.min(msgIdx + 1, loadingMessages.length - 1);
-    document.getElementById('loading-text').textContent = loadingMessages[msgIdx];
+    const el = document.getElementById('loading-text');
+    if (el) el.textContent = loadingMessages[msgIdx];
   }, 2000);
 
   try {
@@ -801,6 +805,7 @@ async function submitAnswers() {
     }
     
     console.log('JSON to parse:', cleanJson.substring(0, 200));
+    resultReady = true;
     resultData = JSON.parse(cleanJson);
     renderResult();
     showScreen('result');
