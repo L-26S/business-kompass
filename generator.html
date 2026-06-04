@@ -759,11 +759,14 @@ Antworte NUR mit dem JSON-Objekt, kein Text davor oder danach. Wichtig: Verwende
 }
 
 async function submitAnswers() {
-  // Show popup briefly
+  // Show popup, then go to loading after 4 seconds
   const popup = document.getElementById('loading-popup');
   if (popup) {
     popup.style.display = 'flex';
-    setTimeout(() => { popup.style.display = 'none'; showScreen('loading'); }, 30000);
+    setTimeout(() => { 
+      popup.style.display = 'none'; 
+      showScreen('loading'); 
+    }, 4000);
   } else {
     showScreen('loading');
   }
