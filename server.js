@@ -75,4 +75,14 @@ app.post('/api/generate', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server läuft auf Port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server läuft auf Port ${PORT}`);
+  
+  // Keep-alive ping alle 14 Minuten damit Render nicht einschläft
+  setInterval(() => {
+    const http = require('http');
+    http.get(`http://localhost:${PORT}/`, () => {
+      console.log('Keep-alive ping');
+    }).on('error', () => {});
+  }, 14 * 60 * 1000);
+});
