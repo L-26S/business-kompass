@@ -26,7 +26,7 @@ app.post('/api/generate', async (req, res) => {
       },
       body: JSON.stringify({
         model: 'claude-haiku-4-5-20251001',
-        max_tokens: 4096,
+        max_tokens: 8096,
         messages: [{ role: 'user', content: prompt }]
       })
     });
@@ -39,6 +39,7 @@ app.post('/api/generate', async (req, res) => {
       return res.status(500).json({ error: data.error.message });
     }
 
+    console.log('Full response:', JSON.stringify(data).substring(0, 500));
     const text = data?.content?.[0]?.text || '';
     
     // JSON bereinigen
