@@ -438,7 +438,7 @@
   <h1 class="intro-title">Herzlichen Glückwunsch!</h1>
   <p style="font-size:17px; color:var(--terra); font-family:'Playfair Display',serif; font-style:italic; margin-bottom:16px; max-width:380px;">Du hast erfolgreich deinen persönlichen Business Kompass freigeschaltet.</p>
   <p class="intro-philosophy">Was du gleich bekommst, hat noch niemand für dich gemacht. Keine Liste die für alle passt. Sondern fünf Ideen die wirklich aus dir entstehen.</p>
-  <p style="font-size:14px; color:var(--text-light); max-width:360px; margin:0 auto 24px; line-height:1.7;">Beantworte jetzt 25 Fragen ehrlich. Je mehr du von dir zeigst, desto mehr wirst du dich in deinen Ergebnissen wiederfinden.</p>
+  <p style="font-size:14px; color:var(--text-light); max-width:360px; margin:0 auto 24px; line-height:1.7;">Die Fragen beleuchten unterschiedliche Winkel deines Lebens. Damit es wirklich persönlich für dich wird. Je ehrlicher du antwortest, desto mehr wirst du dich in deinen Ergebnissen wiederfinden.</p>
   <p style="font-size:12px; color:var(--text-light); max-width:360px; margin:0 auto 32px; line-height:1.6; opacity:0.7;">Die Abbuchung erfolgt durch Digistore24.</p>
   <button class="btn-primary" onclick="startQuiz()">Los geht es →</button>
   <p class="intro-note">Nimm dir die Zeit die du brauchst. Ehrliche Antworten machen den Unterschied.</p>
@@ -449,7 +449,7 @@
   <div class="quiz-inner">
     <div class="quiz-header">
       <a href="index.html" class="quiz-logo" style="text-decoration:none; color:var(--brown-deep);">← Dein Business Kompass</a>
-      <span class="quiz-count" id="quiz-count">1 / 25</span>
+      <span class="quiz-count" id="quiz-count">1 / 30</span>
     </div>
     <div class="progress-outer">
       <div class="progress-inner" id="progress-bar" style="width:0%"></div>
@@ -566,7 +566,9 @@ const questions = [
   { id:11, block:"Verborgene Stärken", blockNum:4, question:"Wofür haben dich Menschen schon immer um Rat gefragt?", type:"text", placeholder:"Freunde, Familie, Kollegen, was fragen sie dich?" },
   { id:12, block:"Verborgene Stärken", blockNum:4, question:"Was konntest du schon immer gut, ohne es wirklich gelernt zu haben?", type:"text", placeholder:"Dinge die für dich selbstverständlich sind, für andere aber nicht..." },
   { id:13, block:"Verborgene Stärken", blockNum:4, question:"Was haben andere über dich gesagt, das dich selbst überrascht hat?", type:"text", placeholder:"Komplimente oder Beobachtungen die du selbst nicht erwartet hättest..." },
-  { id:14, block:"Leben & Kontext", blockNum:5, question:"Was ist deine aktuelle Lebenssituation?", type:"single", options:["Vollzeitjob","Teilzeit","Elternzeit / Zuhause","Studium","Anderes"] },
+  { id:14, block:"Leben & Kontext", blockNum:5, question:"Wie alt bist du?", type:"single", options:["Unter 25","25 bis 34","35 bis 44","45 bis 54","55 oder älter"] },
+  { id:'14b', block:"Leben & Kontext", blockNum:5, question:"Wo lebst du?", type:"single", options:["Großstadt (über 100.000 Einwohner)","Mittelstadt (20.000 bis 100.000)","Kleinstadt oder Dorf","Ich lebe im Ausland"] },
+  { id:'14c', block:"Leben & Kontext", blockNum:5, question:"Was ist deine aktuelle Lebenssituation?", type:"single", options:["Vollzeitjob","Teilzeit","Elternzeit / Zuhause","Studium","Anderes"] },
   { id:15, block:"Leben & Kontext", blockNum:5, question:"Hast du bereits Erfahrung mit Online-Business oder Selbstständigkeit?", type:"single", options:["Nein, kompletter Neustart","Ich habe es versucht aber nichts hat funktioniert","Ich habe bereits etwas aber es läuft nicht richtig","Ja, ich will skalieren"] },
   { id:16, block:"Leben & Kontext", blockNum:5, question:"Mit wem arbeitest du lieber?", type:"single", options:["Einzelpersonen (1:1)","Gruppen oder Communities","Gar nicht direkt mit Menschen, Produkte oder Content"] },
   { id:17, block:"Grenzen & Klarheit", blockNum:6, question:"Was willst du auf keinen Fall?", type:"multi", options:["Vor der Kamera sein","Kaltakquise / aktiv verkaufen","Technisch komplexe Systeme aufbauen","Abhängig von einem einzelnen Kunden sein","Ständige Erreichbarkeit"] },
@@ -577,7 +579,10 @@ const questions = [
   { id:22, block:"Deine Geschichte", blockNum:8, question:"Welches Thema beschäftigt dich gerade tief in dir, das dich nicht loslässt?", type:"text", placeholder:"Etwas das du noch niemandem richtig erklärt hast aber das immer wieder auftaucht..." },
   { id:23, block:"Deine Geschichte", blockNum:8, question:"Gibt es etwas in deinem Leben das du lange als Schwäche gesehen hast, das aber in Wirklichkeit eine Stärke sein könnte?", type:"text", placeholder:"Oft sind unsere größten Stärken das was wir am längsten versteckt haben..." },
   { id:24, block:"Deine Geschichte", blockNum:8, question:"Was würdest du tun wenn du weißt dass du nicht scheitern kannst?", type:"text", placeholder:"Keine Einschränkungen, kein Geld, keine Zeit, keine Angst..." },
-  { id:25, block:"Deine Geschichte", blockNum:8, question:"Wenn du einer einzigen Person auf der Welt wirklich helfen könntest, wer wäre das und womit?", type:"text", placeholder:"Vielleicht jemand der so ist wie du früher warst, oder jemand der kämpft womit du gekämpft hast..." }
+  { id:25, block:"Deine Geschichte", blockNum:8, question:"Wenn du einer einzigen Person auf der Welt wirklich helfen könntest, wer wäre das und womit?", type:"text", placeholder:"Vielleicht jemand der so ist wie du früher warst, oder jemand der kämpft womit du gekämpft hast..." },
+  { id:28, block:"Dein Antrieb", blockNum:9, question:"Gibt es etwas in deinem Leben oder deiner Vergangenheit das dich so beschäftigt hat, dass du dir gewünscht hättest jemand hätte dir damals geholfen?", type:"text", placeholder:"Es darf ruhig persönlich sein. Oft steckt hier die stärkste Idee..." },
+  { id:29, block:"Dein Antrieb", blockNum:9, question:"Was war in den letzten zwei Jahren dein größtes persönliches Learning und was hat sich dadurch in dir verändert?", type:"text", placeholder:"Was weißt du heute über dich das du damals noch nicht wusstest?" },
+  { id:30, block:"Dein Antrieb", blockNum:9, question:"Wenn du morgens aufwachst und etwas in deinem Leben noch nicht stimmt, was ist das? Es darf leise und unfertig sein.", type:"text", placeholder:"Das Unausgesprochene ist oft der stärkste Hinweis..." }
 ];
 
 const blocks = [
@@ -588,7 +593,8 @@ const blocks = [
   { num:5, name:"Leben & Kontext" },
   { num:6, name:"Grenzen & Klarheit" },
   { num:7, name:"Der letzte Filter" },
-  { num:8, name:"Deine Geschichte" }
+  { num:8, name:"Deine Geschichte" },
+  { num:9, name:"Dein Antrieb" }
 ];
 
 let current = 0;
@@ -617,8 +623,8 @@ function startQuiz() {
 
 function renderQuestion() {
   const q = questions[current];
-  document.getElementById('quiz-count').textContent = (current + 1) + ' / 25';
-  document.getElementById('progress-bar').style.width = (current / 25 * 100) + '%';
+  document.getElementById('quiz-count').textContent = (current + 1) + ' / 30';
+  document.getElementById('progress-bar').style.width = (current / 30 * 100) + '%';
 
   // Block dots
   const dotsEl = document.getElementById('block-dots');
@@ -725,21 +731,38 @@ function buildPrompt() {
     return `Frage ${q.id} (${q.block}): ${q.question}\nAntwort: ${answerText}`;
   }).join("\n\n");
 
-  return `Du analysierst 25 ehrliche Antworten einer Person und erstellst daraus 5 Business-Ideen die wirklich zu ihr passen.
+  return `Du analysierst 30 ehrliche Antworten einer Person und erstellst daraus 5 Business-Ideen die wirklich zu ihr passen.
+
+DEINE ROLLE:
+Du bist ein ehrlicher, erfahrener Business-Stratege der sowohl Persönlichkeit als auch Märkte kennt. Du bist kein Ja-Sager. Du sagst klar was funktioniert und was nicht.
 
 SPRACHE UND TON:
-Schreibe wie ein guter Freund der ehrlich ist und genau zugehört hat. Warm, direkt, klar. Keine Bindestriche als Aufzählungszeichen. Keine typischen KI-Phrasen wie "du hast das Potenzial", "mit deiner Leidenschaft" oder "als kreativer Mensch". Keine Coaching-Sprache. Fließende Sätze die man gerne liest.
+Schreibe wie ein guter Freund der ehrlich ist und genau zugehört hat. Warm, direkt, klar. Keine Bindestriche als Aufzählungszeichen. Keine typischen KI-Phrasen wie "du hast das Potenzial" oder "mit deiner Leidenschaft". Keine Coaching-Sprache. Fließende Sätze die man gerne liest.
 
-KONKRETHEIT:
-Zitiere bei jeder Idee mindestens eine konkrete Antwort der Person mit den exakten Worten die sie verwendet hat. Wenn du keine direkte Verbindung zu ihren Antworten herstellen kannst, nenne die Idee nicht.
+KONKRETHEIT UND INTERPRETATION:
+Interpretiere die Antworten der Person. Zitiere NICHT wörtlich was sie geschrieben hat. Destilliere was dahintersteckt. Wenn jemand schreibt "ich mag keine Menschen die die Natur nicht respektieren" dann bedeutet das: Werte-orientiert, Natur-affin, hohe eigene Standards. Formuliere das so.
 
-BEISPIEL wie ein warum_du klingen soll:
-SCHLECHT: "Als kommunikativer Mensch mit Leidenschaft für Finanzen wäre Coaching ideal für dich."
-GUT: "Du hast geschrieben dass Freunde dich seit Jahren fragen wie du mit Geld umgehst und dass dir das ehrlich gesagt schon immer leicht gefallen ist. Genau das ist dein Einstieg. Nicht weil es trendet, sondern weil es schon immer da war."
+MARKTFÄHIGKEIT:
+Berücksichtige ob eine Idee 2025 noch funktioniert oder bereits gesättigt ist. Gesättigte Märkte die du VERMEIDEN sollst: generisches Dropshipping, Print-on-Demand ohne Nische, Standard-Fitness-Coaching, allgemeines Social-Media-Management ohne Spezialisierung, PC-Zusammenbau als Business.
+Was WÄCHST: KI-gestützte Dienstleistungen mit menschlichem Touch, Nischen-Communities, hyperpersonalisierte Angebote, Mental Health und Persönlichkeitsentwicklung, Nachhaltigkeits-Themen mit echter Substanz, Caregiving und Begleitung durch demografischen Wandel, kreative Verbindungen zwischen analogen und digitalen Welten.
+
+AUFTEILUNG DER 5 IDEEN:
+Ideen 1, 2, 3: Solide, realistisch umsetzbar, marktfähig, zu Zeitbudget und Fähigkeiten passend.
+Ideen 4, 5: Originell und überraschend aber trotzdem umsetzbar. Etwas das die Person vielleicht nie gedacht hätte aber das perfekt zu ihrer Persönlichkeit passt. Darf mutig sein.
+
+KEINE KI-LASTIGEN IDEEN wenn die Person keine Affinität zu Technologie oder Content zeigt. Nicht jeder will einen Podcast oder Instagram-Kanal. Denke breiter: Workshops, 1:1 Begleitung, lokale Angebote, physische Produkte mit Nische, Beratung, Kurse, Events.
+
+SKALIERBARKEIT ERWÄHNEN:
+Weise kurz darauf hin ob die Idee ein Zeitlimit hat (z.B. 1:1 Coaching) oder skalierbar ist (digitales Produkt). Das hilft der Person zu verstehen was sie wirklich aufbaut.
+
+HAUPTBUSINESS EINSCHÄTZUNG:
+Wenn du siehst dass jemand das Potenzial für ein Hauptbusiness hat aber noch Skills fehlen, sage das ehrlich als Zusatz. Nicht als Hauptbotschaft sondern als ehrlicher Hinweis am Ende der jeweiligen Idee.
 
 Hier sind die Antworten:
 
-${qa}
+\${qa}
+
+BESONDERS WICHTIG: Die letzten drei Fragen (Dein Antrieb) sind die tiefsten. Sie enthalten oft den Kern der stärksten Idee. Gewichte diese Antworten besonders stark. Wenn jemand dort etwas Persönliches und Verletzliches teilt, ist das fast immer der Ausgangspunkt für ein authentisches Business das wirklich zu ihr oder ihm passt.
 
 ---
 
