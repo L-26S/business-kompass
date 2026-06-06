@@ -448,7 +448,7 @@
 <div id="screen-quiz" class="screen">
   <div class="quiz-inner">
     <div class="quiz-header">
-      <span class="quiz-logo">Dein Business Kompass</span>
+      <a href="index.html" class="quiz-logo" style="text-decoration:none; color:var(--brown-deep);">← Dein Business Kompass</a>
       <span class="quiz-count" id="quiz-count">1 / 25</span>
     </div>
     <div class="progress-outer">
@@ -510,7 +510,7 @@
 <div id="screen-result" class="screen">
   <div class="result-inner">
     <div class="result-header">
-      <span class="quiz-logo">Dein Business Kompass</span>
+      <a href="index.html" class="quiz-logo" style="text-decoration:none; color:var(--brown-deep);">← Dein Business Kompass</a>
       <span class="result-badge">✦ Deine 5 Ideen</span>
     </div>
     <div class="profile-card">
@@ -544,6 +544,12 @@
 </div>
 
 <script>
+// Verhindert Browser-Zurück zum Test
+history.pushState(null, null, window.location.href);
+window.addEventListener('popstate', function() {
+  window.location.href = 'index.html';
+});
+
 const DIGISTORE_LINK = "DEIN_DIGISTORE_LINK";
 
 const questions = [
@@ -642,7 +648,7 @@ function renderQuestion() {
       return `<button class="option-btn${sel ? ' selected' : ''}" onclick="selectSingle('${escapeAttr(opt)}')">${opt}</button>`;
     }).join('') + '</div>';
   } else if (q.type === 'multi') {
-    inputEl.innerHTML = '<div class="options"><div class="multi-hint">Mehrfachauswahl möglich</div>' + q.options.map(opt => {
+    inputEl.innerHTML = '<div class="options"><div class="multi-hint" style="color:rgba(242,232,217,0.7); font-size:12px; margin-bottom:8px; letter-spacing:0.1em; text-transform:uppercase;">✦ Mehrfachauswahl möglich</div>' + q.options.map(opt => {
       const sel = (answers[q.id] || []).includes(opt);
       return `<button class="option-btn${sel ? ' selected' : ''}" onclick="selectMulti('${escapeAttr(opt)}')">${opt}</button>`;
     }).join('') + '</div>';
@@ -819,6 +825,15 @@ async function submitAnswers() {
 }
 
 function renderResult() {
+  // Show PDF hint popup briefly
+  setTimeout(() => {
+    const hint = document.getElementById('pdf-hint-popup');
+    if (hint) {
+      hint.style.display = 'flex';
+      setTimeout(() => { hint.style.display = 'none'; }, 6000);
+    }
+  }, 800);
+
   document.getElementById('result-profile').textContent = resultData.persoenlichkeitsprofil || '';
   document.getElementById('result-motivation').textContent = resultData.motivation || '';
 
@@ -885,6 +900,24 @@ function restart() {
     <a href="datenschutz.html" style="font-size:12px; color:rgba(242,232,217,0.35); text-decoration:none; letter-spacing:0.1em;">Datenschutz</a>
   </div>
 </footer>
+<!-- PDF HINT POPUP -->
+<div id="pdf-hint-popup" style="display:none; position:fixed; bottom:24px; left:50%; transform:translateX(-50%); z-index:300; width:calc(100% - 48px); max-width:480px;">
+  <div style="background:var(--brown-deep); padding:20px 24px; display:flex; align-items:center; gap:16px; box-shadow:0 8px 32px rgba(44,31,20,0.3); animation:slideUpHint 0.4s ease;">
+    <div style="color:var(--terra); font-size:20px; flex-shrink:0;">✦</div>
+    <div style="flex:1;">
+      <p style="font-size:14px; color:var(--cream); font-weight:500; margin-bottom:3px;">Dein Ergebnis ist fertig!</p>
+      <p style="font-size:12px; color:rgba(242,232,217,0.6); line-height:1.5;">Speichere es als PDF – du brauchst es für deinen 30-Tage Plan.</p>
+    </div>
+    <button onclick="openPDF(); document.getElementById('pdf-hint-popup').style.display='none';" style="background:var(--terra); color:var(--cream); border:none; padding:10px 16px; font-size:12px; cursor:pointer; font-family:'DM Sans',sans-serif; white-space:nowrap; letter-spacing:0.08em; text-transform:uppercase;">PDF speichern</button>
+  </div>
+</div>
+<style>
+@keyframes slideUpHint {
+  from { opacity:0; transform:translateX(-50%) translateY(20px); }
+  to { opacity:1; transform:translateX(-50%) translateY(0); }
+}
+</style>
+
 <!-- LOADING POPUP -->
 <div id="loading-popup" style="display:none;" class="popup-overlay">
   <div class="popup-card">
