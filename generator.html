@@ -826,14 +826,20 @@ async function submitAnswers() {
       .replace(/```/g, '')
       .trim();
     
-    // Ersten { und letzten } finden falls extra Text darum
+    // Ersten { und letzten } finden
     const firstBrace = cleanJson.indexOf('{');
     const lastBrace = cleanJson.lastIndexOf('}');
     if (firstBrace !== -1 && lastBrace !== -1) {
       cleanJson = cleanJson.substring(firstBrace, lastBrace + 1);
     }
     
-    console.log('JSON to parse:', cleanJson.substring(0, 200));
+    console.log('JSON preview:', cleanJson.substring(0, 300));
+    console.log('JSON length:', cleanJson.length);
+    
+    if (!cleanJson || cleanJson.length < 10) {
+      throw new Error('Antwort zu kurz oder leer');
+    }
+    
     resultReady = true;
     resultData = JSON.parse(cleanJson);
     renderResult();
